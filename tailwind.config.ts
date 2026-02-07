@@ -10,11 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          black: "#070A0B",
-          dark: "#0B0F10",
-          darker: "#0E1315",
-          card: "#111819",
-          border: "#1A2425",
+          black: "#0D0B05",
+          dark: "#141108",
+          darker: "#1A160C",
+          card: "#1E1A0F",
+          border: "#332B16",
           emerald: "#0B5D3B",
           "emerald-light": "#0E7A4E",
           "emerald-glow": "#14A868",
@@ -39,9 +39,9 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-gradient":
-          "linear-gradient(135deg, #070A0B 0%, #0B1A14 40%, #0B0F10 100%)",
+          "linear-gradient(135deg, #0D0B05 0%, #1A1508 40%, #141108 100%)",
         "card-gradient":
-          "linear-gradient(145deg, rgba(11,24,25,0.8) 0%, rgba(14,19,21,0.6) 100%)",
+          "linear-gradient(145deg, rgba(30,26,15,0.8) 0%, rgba(26,22,12,0.6) 100%)",
         "emerald-gradient":
           "linear-gradient(135deg, #0B5D3B 0%, #0E7A4E 100%)",
       },

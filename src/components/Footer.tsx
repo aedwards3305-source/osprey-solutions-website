@@ -12,9 +12,8 @@ const quickLinks = [
 ]
 
 const socialLinks = [
-  { href: "#", label: "LinkedIn" },
-  { href: "#", label: "Twitter / X" },
-  { href: "#", label: "GitHub" },
+  { href: "#", label: "Facebook" },
+  { href: "#", label: "Instagram" },
 ]
 
 export default function Footer() {
@@ -95,7 +94,12 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-subtle" />
-                <span className="text-sm text-brand-muted">(xxx) xxx-xxxx</span>
+                <a
+                  href="tel:+12272209040"
+                  className="text-sm text-brand-muted transition-colors hover:text-brand-text"
+                >
+                  (227) 220-9040
+                </a>
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-subtle" />
