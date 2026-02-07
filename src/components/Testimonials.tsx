@@ -45,6 +45,46 @@ const testimonials = [
       "We went from zero online presence to a beautiful e-commerce site in five weeks. Osprey Solutions handled everything\u2014design, payments, shipping logic. Sales doubled in our first quarter online.",
     result: "2x revenue in 90 days",
   },
+  {
+    name: "Kevin Tran",
+    role: "Owner",
+    business: "Precision Auto Care",
+    quote:
+      "Our old site looked like it was built in 2005. Osprey Solutions gave us a modern site with online appointment scheduling and we saw a 75% jump in new customer bookings within weeks. Wish we\u2019d done this sooner.",
+    result: "75% more new bookings",
+  },
+  {
+    name: "Rachel Hoffman",
+    role: "Founder",
+    business: "Bright Minds Tutoring",
+    quote:
+      "Osprey Solutions built us a parent portal with scheduling, progress tracking, and payments all in one place. Parents love it, and we cut our admin time in half. The team was incredibly responsive throughout.",
+    result: "50% less admin work",
+  },
+  {
+    name: "Marcus Williams",
+    role: "General Manager",
+    business: "Coastal Property Group",
+    quote:
+      "We needed a property listing platform that stood out from cookie-cutter templates. Osprey Solutions delivered a custom site with virtual tours and lead capture that generates 40+ qualified leads a month.",
+    result: "40+ leads/month",
+  },
+  {
+    name: "Amanda Foster",
+    role: "Co-Founder",
+    business: "PurePlate Meal Prep",
+    quote:
+      "From subscription management to delivery zone mapping, Osprey Solutions nailed every detail of our meal prep platform. Customer retention is up 35% since launch and the dashboard saves us hours every day.",
+    result: "35% better retention",
+  },
+  {
+    name: "Tony Bassett",
+    role: "Director",
+    business: "Iron Bridge Construction",
+    quote:
+      "We were drowning in spreadsheets for project tracking. Osprey Solutions built us a custom job management app that our whole crew actually uses. Change orders, timelines, budgets\u2014all in one place now.",
+    result: "Zero spreadsheet chaos",
+  },
 ]
 
 const slideVariants = {

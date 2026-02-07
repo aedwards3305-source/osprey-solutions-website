@@ -46,7 +46,7 @@ export default function Header() {
             <span className="text-lg font-bold text-white">O</span>
           </div>
           <span className="text-lg font-bold tracking-tight text-brand-text">
-            Osprey<span className="text-brand-emerald-glow">.</span>
+            Osprey Solutions<span className="text-brand-emerald-glow">.</span>
           </span>
         </a>
 
