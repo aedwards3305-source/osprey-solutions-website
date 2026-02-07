@@ -458,25 +458,34 @@ function ProjectCard({ project, index, expanded, onToggle }: { project: typeof p
       className="glass-card-hover group flex flex-col overflow-hidden"
     >
       {/* Browser frame preview */}
-      <div className="relative">
-        {/* Browser chrome */}
-        <div className="flex items-center gap-1.5 bg-[#1a1a1f] px-3 py-1.5 border-b border-white/5">
-          <div className="flex gap-1">
-            <div className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
-            <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
+      {(() => {
+        const previewContent = (
+          <div className="relative">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-1.5 bg-[#1a1a1f] px-3 py-1.5 border-b border-white/5">
+              <div className="flex gap-1">
+                <div className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
+                <div className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
+                <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
+              </div>
+              <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
+                <span className={`text-[8px] ${project.url ? "text-white/40 underline underline-offset-2" : "text-white/25"}`}>{project.url || `${project.title.toLowerCase().replace(/\s+/g, "")}.com`}</span>
+              </div>
+            </div>
+            {/* Preview content */}
+            <div className="aspect-[16/10] overflow-hidden">
+              <Preview />
+            </div>
+            {/* Gradient fade at bottom */}
+            <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-brand-card/90 to-transparent" />
           </div>
-          <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
-            <span className="text-[8px] text-white/25">{project.url || `${project.title.toLowerCase().replace(/\s+/g, "")}.com`}</span>
-          </div>
-        </div>
-        {/* Preview content */}
-        <div className="aspect-[16/10] overflow-hidden">
-          <Preview />
-        </div>
-        {/* Gradient fade at bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-brand-card/90 to-transparent" />
-      </div>
+        )
+        return project.url ? (
+          <a href={`https://${project.url}`} target="_blank" rel="noopener noreferrer" className="block">
+            {previewContent}
+          </a>
+        ) : previewContent
+      })()}
 
       {/* Card body */}
       <div className="flex flex-1 flex-col p-6 sm:p-8">
