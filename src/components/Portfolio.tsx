@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, ChevronDown, AlertTriangle, Lightbulb, BarChart3 } from "lucide-react"
 
@@ -424,8 +424,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
-  const [expanded, setExpanded] = useState(false)
+function ProjectCard({ project, index, expanded, onToggle }: { project: typeof projects[0]; index: number; expanded: boolean; onToggle: () => void }) {
   const Preview = previewComponents[index]
 
   return (
@@ -488,7 +487,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
         {/* Expand toggle */}
         <button
-          onClick={() => setExpanded(!expanded)}
+          onClick={onToggle}
           className="mt-4 flex items-center gap-1.5 text-sm font-medium text-brand-emerald-glow transition-colors hover:text-brand-emerald-light"
         >
           {expanded ? "Hide" : "View"} Case Study
@@ -537,6 +536,34 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 }
 
 export default function Portfolio() {
+  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set())
+  const [cols, setCols] = useState(3)
+
+  useEffect(() => {
+    const updateCols = () => {
+      if (window.innerWidth >= 1024) setCols(3)
+      else if (window.innerWidth >= 768) setCols(2)
+      else setCols(1)
+    }
+    updateCols()
+    window.addEventListener("resize", updateCols)
+    return () => window.removeEventListener("resize", updateCols)
+  }, [])
+
+  const toggleRow = useCallback((index: number) => {
+    const row = Math.floor(index / cols)
+    setExpandedRows(prev => {
+      const next = new Set(prev)
+      if (next.has(row)) next.delete(row)
+      else next.add(row)
+      return next
+    })
+  }, [cols])
+
+  const isExpanded = useCallback((index: number) => {
+    return expandedRows.has(Math.floor(index / cols))
+  }, [expandedRows, cols])
+
   return (
     <section id="work" className="section-padding relative">
       {/* Background decoration */}
@@ -565,7 +592,13 @@ export default function Portfolio() {
           className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
           {projects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={i}
+              expanded={isExpanded(i)}
+              onToggle={() => toggleRow(i)}
+            />
           ))}
         </motion.div>
       </div>
