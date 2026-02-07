@@ -4,7 +4,6 @@ import Services from "@/components/Services"
 import Portfolio from "@/components/Portfolio"
 import Comparison from "@/components/Comparison"
 import Process from "@/components/Process"
-import Pricing from "@/components/Pricing"
 import Testimonials from "@/components/Testimonials"
 import FAQ from "@/components/FAQ"
 import LeadMagnet from "@/components/LeadMagnet"
@@ -21,7 +20,6 @@ export default function Home() {
         <Portfolio />
         <Comparison />
         <Process />
-        <Pricing />
         <Testimonials />
         <FAQ />
         <LeadMagnet />

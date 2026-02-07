@@ -28,7 +28,7 @@ export default function Hero() {
         >
           <span className="gold-badge">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-gold animate-glow-pulse" />
-            Now accepting new projects for 2025
+            Now accepting new projects for 2026
           </span>
         </motion.div>
 

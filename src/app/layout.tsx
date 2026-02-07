@@ -3,7 +3,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ospreysolutions.io"),
-  title: "Osprey Solutions LLC | Apps, Websites & Digital Systems That Win Customers",
+  title: "Osprey Solutions | Apps, Websites & Digital Systems That Win Customers",
   description:
     "Osprey Solutions builds custom apps, websites, and digital business systems for small businesses and growing teams. Faster than DIY, better than big agencies. Get a free quote today.",
   keywords: [
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
     "business automation",
     "Osprey Solutions",
   ],
-  authors: [{ name: "Osprey Solutions LLC" }],
-  creator: "Osprey Solutions LLC",
+  authors: [{ name: "Osprey Solutions" }],
+  creator: "Osprey Solutions",
   openGraph: {
-    title: "Osprey Solutions LLC | Apps, Websites & Digital Systems",
+    title: "Osprey Solutions | Apps, Websites & Digital Systems",
     description:
       "Custom apps, websites, and digital business systems for small businesses and growing teams. Faster than DIY, better than big agencies.",
     url: "https://ospreysolutions.io",
-    siteName: "Osprey Solutions LLC",
+    siteName: "Osprey Solutions",
     locale: "en_US",
     type: "website",
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Osprey Solutions LLC | Digital Solutions That Win Customers",
+    title: "Osprey Solutions | Digital Solutions That Win Customers",
     description:
       "Custom apps, websites, and digital systems. Faster than DIY, better than big agencies.",
     images: ["/og-image.png"],
@@ -59,7 +59,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "Osprey Solutions LLC",
+    name: "Osprey Solutions",
     description:
       "Custom apps, websites, and digital business solutions for small businesses and growing teams.",
     url: "https://ospreysolutions.io",

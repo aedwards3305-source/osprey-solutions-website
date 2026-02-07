@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Star, Quote } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
 
 const testimonials = [
   {
@@ -28,22 +29,70 @@ const testimonials = [
       "The team at Osprey understood our business from day one. Our new e-commerce platform is fast, beautiful, and our average order value jumped 42%. Best investment we\u2019ve made this year.",
     result: "42% higher AOV",
   },
+  {
+    name: "David Kowalski",
+    role: "Managing Partner",
+    business: "Heritage Law Group",
+    quote:
+      "Our client portal cut status-inquiry calls by 60%. Osprey delivered ahead of schedule and the quality blew us away. We\u2019ve already referred two other firms.",
+    result: "60% fewer support calls",
+  },
+  {
+    name: "Maria Santos",
+    role: "CEO",
+    business: "Bloom Floral Co.",
+    quote:
+      "We went from zero online presence to a beautiful e-commerce site in five weeks. Osprey handled everything\u2014design, payments, shipping logic. Sales doubled in our first quarter online.",
+    result: "2x revenue in 90 days",
+  },
 ]
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-}
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 300 : -300,
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? -300 : 300,
+    opacity: 0,
+    scale: 0.95,
+  }),
 }
 
 export default function Testimonials() {
+  const [[current, direction], setCurrent] = useState([0, 0])
+  const [isPaused, setIsPaused] = useState(false)
+
+  const paginate = useCallback(
+    (dir: number) => {
+      setCurrent(([prev]) => {
+        const next = (prev + dir + testimonials.length) % testimonials.length
+        return [next, dir]
+      })
+    },
+    []
+  )
+
+  // Auto-scroll every 6 seconds
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(() => paginate(1), 6000)
+    return () => clearInterval(timer)
+  }, [isPaused, paginate])
+
+  const t = testimonials[current]
+
   return (
-    <section className="section-padding relative">
-      <div className="section-container">
+    <section className="section-padding relative overflow-hidden">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-emerald/3 blur-[150px]" />
+
+      <div className="section-container relative">
         {/* Header */}
         <div className="text-center">
           <span className="section-label">Testimonials</span>
@@ -52,58 +101,113 @@ export default function Testimonials() {
             <span className="text-gradient-emerald">that ship</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Don&apos;t take our word for it\u2014hear from founders and operators
+            Don&apos;t take our word for it&mdash;hear from founders and operators
             who chose Osprey.
           </p>
         </div>
 
-        {/* Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="mt-16 grid gap-6 md:grid-cols-3"
+        {/* Carousel */}
+        <div
+          className="relative mx-auto mt-16 max-w-3xl"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
-          {testimonials.map((t) => (
-            <motion.div
-              key={t.name}
-              variants={cardVariants}
-              className="glass-card flex flex-col p-6 sm:p-8"
-            >
-              {/* Stars */}
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-4 w-4 fill-brand-gold text-brand-gold"
-                  />
-                ))}
-              </div>
+          {/* Card area with fixed height */}
+          <div className="relative min-h-[320px] sm:min-h-[280px]">
+            <AnimatePresence initial={false} custom={direction} mode="wait">
+              <motion.div
+                key={current}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.3 },
+                }}
+                className="absolute inset-0"
+              >
+                <div className="glass-card flex h-full flex-col p-8 sm:p-10">
+                  {/* Stars */}
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-brand-gold text-brand-gold"
+                      />
+                    ))}
+                  </div>
 
-              {/* Quote */}
-              <div className="relative mt-5 flex-1">
-                <Quote className="absolute -left-1 -top-1 h-6 w-6 text-brand-emerald/20" />
-                <p className="relative text-sm leading-relaxed text-brand-muted">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-              </div>
+                  {/* Quote */}
+                  <div className="relative mt-6 flex-1">
+                    <Quote className="absolute -left-1 -top-1 h-8 w-8 text-brand-emerald/15" />
+                    <p className="relative text-base leading-relaxed text-brand-muted sm:text-lg">
+                      &ldquo;{t.quote}&rdquo;
+                    </p>
+                  </div>
 
-              {/* Author */}
-              <div className="mt-6 flex items-center justify-between border-t border-brand-border/30 pt-5">
-                <div>
-                  <p className="font-semibold text-brand-text">{t.name}</p>
-                  <p className="text-sm text-brand-subtle">
-                    {t.role}, {t.business}
-                  </p>
+                  {/* Author */}
+                  <div className="mt-8 flex items-center justify-between border-t border-brand-border/30 pt-6">
+                    <div className="flex items-center gap-4">
+                      {/* Avatar initial */}
+                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-emerald/15 text-sm font-bold text-brand-emerald-glow">
+                        {t.name.split(" ").map((n) => n[0]).join("")}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-brand-text">{t.name}</p>
+                        <p className="text-sm text-brand-subtle">
+                          {t.role}, {t.business}
+                        </p>
+                      </div>
+                    </div>
+                    <span className="rounded-full bg-brand-emerald/10 px-3 py-1 text-xs font-medium text-brand-emerald-glow">
+                      {t.result}
+                    </span>
+                  </div>
                 </div>
-                <span className="rounded-full bg-brand-emerald/10 px-3 py-1 text-xs font-medium text-brand-emerald-glow">
-                  {t.result}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Controls */}
+          <div className="mt-8 flex items-center justify-center gap-6">
+            {/* Prev */}
+            <button
+              onClick={() => paginate(-1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border/50 text-brand-subtle transition-all hover:border-brand-emerald/40 hover:text-brand-emerald-glow"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            {/* Dots */}
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent([i, i > current ? 1 : -1])}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-8 bg-brand-emerald-glow"
+                      : "w-2 bg-brand-border hover:bg-brand-subtle"
+                  }`}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Next */}
+            <button
+              onClick={() => paginate(1)}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border/50 text-brand-subtle transition-all hover:border-brand-emerald/40 hover:text-brand-emerald-glow"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   )
