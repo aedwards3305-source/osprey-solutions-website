@@ -1,7 +1,8 @@
 "use client"
 
+import { useRef, useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Zap, Shield, Clock, Headphones } from "lucide-react"
+import { ArrowRight, Zap, Shield, Clock, Headphones, GripVertical } from "lucide-react"
 
 const trustItems = [
   { icon: Zap, text: "Launch in under 72 hours" },
@@ -123,80 +124,117 @@ function AfterSite() {
 }
 
 function HeroBeforeAfter() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [sliderPos, setSliderPos] = useState(35)
+  const isDragging = useRef(false)
+
+  const updatePosition = useCallback((clientX: number) => {
+    const container = containerRef.current
+    if (!container) return
+    const rect = container.getBoundingClientRect()
+    const x = clientX - rect.left
+    const pct = Math.max(5, Math.min(95, (x / rect.width) * 100))
+    setSliderPos(pct)
+  }, [])
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!isDragging.current) return
+      e.preventDefault()
+      updatePosition(e.clientX)
+    }
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!isDragging.current) return
+      updatePosition(e.touches[0].clientX)
+    }
+    const handleUp = () => { isDragging.current = false }
+
+    window.addEventListener("mousemove", handleMove)
+    window.addEventListener("mouseup", handleUp)
+    window.addEventListener("touchmove", handleTouchMove)
+    window.addEventListener("touchend", handleUp)
+    return () => {
+      window.removeEventListener("mousemove", handleMove)
+      window.removeEventListener("mouseup", handleUp)
+      window.removeEventListener("touchmove", handleTouchMove)
+      window.removeEventListener("touchend", handleUp)
+    }
+  }, [updatePosition])
+
+  const handleStart = useCallback((clientX: number) => {
+    isDragging.current = true
+    updatePosition(clientX)
+  }, [updatePosition])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.6 }}
-      className="relative mx-auto mt-16 mb-8 max-w-4xl"
+      className="relative mx-auto mt-16 mb-8 max-w-3xl"
     >
-      <div className="relative flex items-start justify-center gap-4 sm:gap-6">
-        {/* Before */}
-        <motion.div
-          initial={{ opacity: 0, x: -30, rotate: -2 }}
-          animate={{ opacity: 1, x: 0, rotate: -2 }}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          className="relative w-[42%] shrink-0"
-        >
-          <span className="absolute -top-3 left-3 z-10 rounded-full bg-red-500/90 px-2.5 py-0.5 text-[10px] font-bold text-white shadow-lg">Before</span>
-          <div className="overflow-hidden rounded-xl border border-white/10 shadow-xl opacity-70">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-1.5 bg-[#e8e8e8] px-2.5 py-1.5 border-b border-gray-300">
-              <div className="flex gap-1">
-                <div className="h-1.5 w-1.5 rounded-full bg-red-400/60" />
-                <div className="h-1.5 w-1.5 rounded-full bg-yellow-400/60" />
-                <div className="h-1.5 w-1.5 rounded-full bg-green-400/60" />
-              </div>
-              <div className="flex-1 mx-2 rounded bg-white px-2 py-0.5">
-                <span className="text-[6px] text-gray-400">joesplumbing-site.web</span>
-              </div>
-            </div>
-            <div className="aspect-[4/3] overflow-hidden">
-              <BeforeSite />
-            </div>
-          </div>
-        </motion.div>
+      {/* Glow */}
+      <div className="absolute -inset-4 rounded-3xl bg-brand-emerald/5 blur-2xl" />
 
-        {/* After */}
-        <motion.div
-          initial={{ opacity: 0, x: 30, rotate: 1 }}
-          animate={{ opacity: 1, x: 0, rotate: 1 }}
-          transition={{ duration: 0.7, delay: 1.0 }}
-          className="relative w-[52%] shrink-0"
-        >
-          <span className="absolute -top-3 right-3 z-10 rounded-full bg-emerald-500/90 px-2.5 py-0.5 text-[10px] font-bold text-white shadow-lg">After</span>
-          {/* Glow */}
-          <div className="absolute -inset-3 rounded-2xl bg-brand-emerald/8 blur-xl" />
-          <div className="relative overflow-hidden rounded-xl border border-brand-emerald/30 shadow-2xl shadow-brand-emerald/10">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-1.5 bg-[#1a1a1f] px-2.5 py-1.5 border-b border-white/5">
-              <div className="flex gap-1">
-                <div className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
-                <div className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
-                <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
-              </div>
-              <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
-                <span className="text-[6px] text-white/25">joesplumbing.com</span>
-              </div>
-            </div>
-            <div className="aspect-[4/3] overflow-hidden">
-              <AfterSite />
-            </div>
+      {/* Browser chrome wrapper */}
+      <div className="relative overflow-hidden rounded-2xl border border-brand-border/50 shadow-2xl shadow-brand-emerald/5">
+        {/* Browser title bar */}
+        <div className="flex items-center gap-2 border-b border-brand-border/30 bg-[#1a1a1f] px-4 py-3">
+          <div className="flex gap-1.5">
+            <div className="h-3 w-3 rounded-full bg-red-500/60" />
+            <div className="h-3 w-3 rounded-full bg-yellow-500/60" />
+            <div className="h-3 w-3 rounded-full bg-green-500/60" />
           </div>
-        </motion.div>
-      </div>
-
-      {/* Connecting arrow */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, delay: 1.4, type: "spring" }}
-        className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
-      >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-emerald/40 bg-brand-dark shadow-lg shadow-brand-emerald/20">
-          <ArrowRight className="h-5 w-5 text-brand-emerald-glow" />
+          <div className="ml-3 flex-1 rounded-md bg-white/5 px-3 py-1">
+            <span className="text-xs text-white/25">joesplumbing.com</span>
+          </div>
         </div>
-      </motion.div>
+
+        {/* Slider area */}
+        <div
+          ref={containerRef}
+          className="relative aspect-[16/10] cursor-col-resize select-none overflow-hidden"
+          onMouseDown={(e) => handleStart(e.clientX)}
+          onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+        >
+          {/* After layer (full width, behind) */}
+          <div className="absolute inset-0">
+            <AfterSite />
+          </div>
+
+          {/* Before layer (clipped from left) */}
+          <div
+            className="absolute inset-0"
+            style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
+          >
+            <BeforeSite />
+          </div>
+
+          {/* Slider line + handle */}
+          <div
+            className="absolute top-0 bottom-0 z-10"
+            style={{ left: `${sliderPos}%` }}
+          >
+            {/* Vertical line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/60 shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+
+            {/* Drag handle */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white/80 bg-brand-dark/90 shadow-lg shadow-black/40 backdrop-blur-sm">
+                <GripVertical className="h-4 w-4 text-white/80" />
+              </div>
+            </div>
+          </div>
+
+          {/* Labels */}
+          <div className="pointer-events-none absolute top-3 left-3 z-10">
+            <span className="rounded-full bg-red-500/90 px-2.5 py-1 text-xs font-bold text-white shadow-lg">Before</span>
+          </div>
+          <div className="pointer-events-none absolute top-3 right-3 z-10">
+            <span className="rounded-full bg-emerald-500/90 px-2.5 py-1 text-xs font-bold text-white shadow-lg">After</span>
+          </div>
+        </div>
+      </div>
     </motion.div>
   )
 }
