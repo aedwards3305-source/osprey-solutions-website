@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-brand-black text-brand-text antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-emerald/40 text-white;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply relative rounded-2xl border border-brand-border/50 bg-brand-card/60 backdrop-blur-xl;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-brand-emerald/30;
+    box-shadow:
+      0 0 0 1px rgba(11, 93, 59, 0.15),
+      0 8px 40px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(11, 93, 59, 0.06);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-gradient px-6 py-3.5
+           font-semibold text-white transition-all duration-300
+           hover:shadow-lg hover:shadow-brand-emerald/20 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-brand-emerald/50 focus:ring-offset-2 focus:ring-offset-brand-black;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-brand-gold/40 px-6 py-3.5
+           font-semibold text-brand-gold transition-all duration-300
+           hover:bg-brand-gold/10 hover:border-brand-gold/70 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-brand-gold/50 focus:ring-offset-2 focus:ring-offset-brand-black;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5
+           font-medium text-brand-muted transition-all duration-300
+           hover:text-brand-text hover:bg-white/5
+           focus:outline-none focus:ring-2 focus:ring-white/20 focus:ring-offset-2 focus:ring-offset-brand-black;
+  }
+
+  .section-container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-20 sm:py-28 lg:py-32;
+  }
+
+  .section-label {
+    @apply mb-4 inline-flex items-center gap-2 rounded-full border border-brand-emerald/30
+           bg-brand-emerald/10 px-4 py-1.5 text-sm font-medium text-brand-emerald-glow;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mt-4 max-w-2xl text-lg text-brand-muted sm:text-xl;
+  }
+
+  .gold-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-brand-gold/30
+           bg-brand-gold/10 px-3 py-1 text-xs font-medium text-brand-gold;
+  }
+}
+
+@layer utilities {
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-brand-emerald-glow to-emerald-300 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-gold {
+    @apply bg-gradient-to-r from-brand-gold to-brand-gold-light bg-clip-text text-transparent;
+  }
+
+  .noise-bg {
+    position: relative;
+  }
+
+  .noise-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070a0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a2425;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0b5d3b;
+}
