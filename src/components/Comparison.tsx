@@ -64,6 +64,13 @@ const rows: ComparisonRow[] = [
     osprey: "yes",
   },
   {
+    feature: "AI-powered features built in",
+    diy: "no",
+    freelancer: "no",
+    agency: "partial",
+    osprey: "yes",
+  },
+  {
     feature: "No monthly platform lock-in",
     diy: "no",
     freelancer: "yes",

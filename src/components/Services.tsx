@@ -34,10 +34,10 @@ const services = [
   },
   {
     icon: Workflow,
-    title: "Automation",
+    title: "AI & Automation",
     description:
-      "Stop doing repetitive tasks manually. We build automations that save hours every week.",
-    details: ["Workflow automation", "Email sequences", "Data pipelines", "Scheduled tasks"],
+      "From AI chatbots to smart workflows, we build intelligent automations that save hours and surface insights you\u2019d miss.",
+    details: ["AI chatbots", "Smart workflows", "Predictive analytics", "Process automation"],
   },
   {
     icon: Puzzle,
@@ -77,7 +77,7 @@ export default function Services() {
             <span className="text-gradient-emerald">grow online</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            From landing pages to full-scale platforms, we handle the entire build
+            From landing pages to AI-powered platforms, we handle the entire build
             so you can focus on running your business.
           </p>
         </div>

@@ -171,7 +171,7 @@ function HeroBeforeAfter() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.6 }}
-      className="relative mx-auto mt-16 mb-8 max-w-6xl"
+      className="relative mx-auto mt-12 mb-8 w-full"
     >
       {/* Glow */}
       <div className="absolute -inset-4 rounded-3xl bg-brand-emerald/5 blur-2xl" />
@@ -248,7 +248,7 @@ export default function Hero() {
         <div className="absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-brand-gold/3 blur-[100px]" />
       </div>
 
-      <div className="section-container relative flex min-h-screen flex-col items-center justify-center pt-20 text-center">
+      <div className="section-container relative flex flex-col items-center pt-28 sm:pt-36 text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -268,7 +268,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          Apps, websites, and digital systems that{" "}
+          Apps, websites &amp; AI-powered systems that{" "}
           <span className="text-gradient-emerald">win customers</span>
         </motion.h1>
 
@@ -279,8 +279,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-6 max-w-2xl text-lg text-brand-muted sm:text-xl"
         >
-          We build custom digital solutions for small businesses and growing teams.
-          Faster than doing it yourself. Better than big agencies. And you own every pixel.
+          We build custom apps, websites, and AI-driven solutions for small businesses
+          and growing teams. Faster than DIY. Smarter than big agencies. You own every pixel.
         </motion.p>
 
         {/* CTAs */}

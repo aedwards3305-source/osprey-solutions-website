@@ -369,13 +369,13 @@ const projects = [
     title: "BrightPath CRM",
     type: "Custom Web Application",
     description:
-      "A full-featured CRM built for a growing consulting firm. Pipeline management, automated follow-ups, and client reporting\u2014all in one place.",
+      "A full-featured CRM with AI-powered lead scoring, pipeline management, automated follow-ups, and client reporting\u2014all in one place.",
     outcome: "Saved 15 hours per week in manual data entry",
-    tech: ["React", "Node.js", "PostgreSQL", "REST API"],
+    tech: ["React", "Node.js", "PostgreSQL", "OpenAI API"],
     color: "from-blue-500/20 to-indigo-500/10",
     caseStudy: {
       problem: "BrightPath was juggling spreadsheets, email threads, and sticky notes to track 200+ client relationships. Leads were falling through the cracks.",
-      solution: "We built a custom CRM with pipeline visualization, automated follow-up sequences, client reporting dashboards, and integration with their email and calendar.",
+      solution: "We built a custom CRM with AI lead scoring, pipeline visualization, automated follow-up sequences, client reporting dashboards, and integration with their email and calendar.",
       results: "The team saves 15 hours per week. Lead response time dropped from 48 hours to under 2 hours. Close rate improved by 20%.",
     },
   },
@@ -397,7 +397,7 @@ const projects = [
     title: "TaskFlow Mobile",
     type: "Cross-Platform Mobile App",
     description:
-      "A team productivity app for a construction company. Task assignment, photo documentation, GPS check-ins, and real-time progress updates.",
+      "A team productivity app for a construction company. AI-assisted task assignment, photo documentation, GPS check-ins, and real-time progress updates.",
     outcome: "Adopted by 200+ field workers in 3 months",
     tech: ["React Native", "Firebase", "Maps API", "Push Notifications"],
     color: "from-purple-500/20 to-pink-500/10",
