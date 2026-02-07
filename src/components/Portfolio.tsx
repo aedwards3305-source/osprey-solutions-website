@@ -6,6 +6,63 @@ import { TrendingUp, ChevronDown, AlertTriangle, Lightbulb, BarChart3 } from "lu
 
 /* ━━━ Mini Preview Components (SolarCommand-inspired) ━━━ */
 
+function VarietyAmayaPreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-white text-[8px] leading-tight">
+      {/* Nav bar */}
+      <div className="flex items-center justify-between bg-[#1B3A5C] px-3 py-1.5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-white text-[5px] font-bold text-[#1B3A5C] flex items-center justify-center">VA</div>
+          <span className="text-[7px] font-bold text-white">Variety <span className="text-sky-300">Amaya</span></span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[4.5px] text-white/60">Services</span>
+          <span className="text-[4.5px] text-white/60">About</span>
+          <span className="text-[4.5px] text-white/60">FAQ</span>
+          <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[5px] font-semibold text-white">Free Estimate</span>
+        </div>
+      </div>
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-[#1B3A5C] to-[#2A5580] px-3 py-2.5">
+        <p className="text-[10px] font-bold text-white leading-tight">Your Trusted</p>
+        <p className="text-[10px] font-bold text-sky-300 leading-tight">General Contractor</p>
+        <p className="mt-0.5 text-[5px] text-white/60">Serving the DMV Area &middot; Licensed & Insured</p>
+        <div className="mt-1.5 flex gap-1">
+          <span className="rounded bg-sky-500 px-1.5 py-0.5 text-[5px] font-semibold text-white">Get Free Estimate</span>
+          <span className="rounded border border-white/30 px-1.5 py-0.5 text-[5px] text-white/70">Our Services</span>
+        </div>
+      </div>
+      {/* Trust bar */}
+      <div className="grid grid-cols-3 gap-0 border-b border-gray-200">
+        {[
+          { n: "Licensed", l: "& Insured" },
+          { n: "Free", l: "Estimates" },
+          { n: "Military", l: "Discounts" },
+        ].map((s) => (
+          <div key={s.n} className="border-r border-gray-200 last:border-r-0 py-1 text-center">
+            <p className="text-[6px] font-bold text-[#1B3A5C]">{s.n}</p>
+            <p className="text-[4px] text-gray-400">{s.l}</p>
+          </div>
+        ))}
+      </div>
+      {/* Service grid */}
+      <div className="flex-1 px-3 py-1.5">
+        <p className="text-[5px] font-semibold text-gray-500 mb-1">Our Services</p>
+        <div className="grid grid-cols-4 gap-1">
+          {["Bathrooms", "Kitchens", "Roofing", "Decks", "Painting", "Electrical", "HVAC", "Plumbing"].map((svc) => (
+            <div key={svc} className="rounded border border-gray-200 bg-gray-50 p-1 text-center">
+              <div className="mx-auto mb-0.5 h-2.5 w-2.5 rounded bg-[#1B3A5C]/10 flex items-center justify-center">
+                <div className="h-1 w-1 rounded-sm bg-[#1B3A5C]/40" />
+              </div>
+              <p className="text-[4.5px] font-medium text-[#1B3A5C]">{svc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function SummitPreview() {
   return (
     <div className="flex h-full w-full flex-col bg-[#0A0A0A] text-[8px] leading-tight">
@@ -321,11 +378,26 @@ function FiresidePreview() {
   )
 }
 
-const previewComponents = [SummitPreview, BrightPathPreview, VerdantPreview, TaskFlowPreview, HeritagePreview, FiresidePreview]
+const previewComponents = [VarietyAmayaPreview, SummitPreview, BrightPathPreview, VerdantPreview, TaskFlowPreview, HeritagePreview, FiresidePreview]
 
 /* ━━━ Project Data ━━━ */
 
 const projects = [
+  {
+    title: "Variety Amaya LLC",
+    type: "Website + Lead Generation",
+    url: "varietyamaya.net",
+    description:
+      "A professional website for a licensed general contractor serving the DMV area. 24+ service categories, online estimate requests, customer testimonials, and a mobile-optimized lead funnel.",
+    outcome: "3x more estimate requests in the first 60 days",
+    tech: ["Next.js", "Tailwind CSS", "Vercel", "SEO"],
+    color: "from-sky-500/20 to-blue-500/10",
+    caseStudy: {
+      problem: "Variety Amaya had no website and relied entirely on word-of-mouth and yard signs. Potential customers searching for contractors online couldn\u2019t find them, and they were losing jobs to competitors with a digital presence.",
+      solution: "We built a professional, mobile-first website showcasing all 24+ services with a fast estimate request form, customer testimonials, trust signals (licensed & insured, military discounts), and local SEO optimization for the DMV market.",
+      results: "Estimate requests tripled in the first 60 days. The site ranks on page one for key local search terms. The owner reports that most new customers now find them through the website instead of referrals alone.",
+    },
+  },
   {
     title: "Summit Fitness Studio",
     type: "Website + Booking System",
@@ -442,7 +514,7 @@ function ProjectCard({ project, index, expanded, onToggle }: { project: typeof p
             <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
           </div>
           <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
-            <span className="text-[8px] text-white/25">{project.title.toLowerCase().replace(/\s+/g, "")}.com</span>
+            <span className="text-[8px] text-white/25">{project.url || `${project.title.toLowerCase().replace(/\s+/g, "")}.com`}</span>
           </div>
         </div>
         {/* Preview content */}
