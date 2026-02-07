@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "How much does a project cost?",
     answer:
-      "Projects start at $2,500 for a professional website and scale based on scope and complexity. We\u2019ll provide a detailed, fixed-price quote after our discovery call\u2014no surprise invoices, no scope creep charges. You approve the budget before work begins.",
+      "Every project is different, so pricing depends on scope, complexity, and timeline. We\u2019ll provide a detailed, fixed-price quote after our discovery call\u2014no surprise invoices, no scope creep charges. You approve the budget before any work begins.",
   },
   {
     question: "How many revisions do I get?",
