@@ -4,6 +4,261 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, ChevronDown, AlertTriangle, Lightbulb, BarChart3 } from "lucide-react"
 
+/* ━━━ Mini Preview Components (SolarCommand-inspired) ━━━ */
+
+function SummitPreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-[#0A0A0A] text-[8px] leading-tight">
+      <div className="flex items-center justify-between px-3 py-1.5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-emerald-500 to-emerald-700 text-[5px] font-bold text-white flex items-center justify-center">S</div>
+          <span className="text-[7px] font-bold text-white">Summit <span className="text-emerald-400">Fitness</span></span>
+        </div>
+        <span className="rounded bg-emerald-600 px-1.5 py-0.5 text-[5px] font-semibold text-white">Book Now</span>
+      </div>
+      <div className="px-3 py-2">
+        <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.5 text-[4.5px] text-emerald-400">Online booking live</span>
+        <p className="mt-1.5 text-[10px] font-bold text-white leading-tight">Train smarter.</p>
+        <p className="text-[10px] font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent leading-tight">Results guaranteed.</p>
+      </div>
+      <div className="mx-3 grid grid-cols-3 gap-1 rounded-lg border border-white/5 bg-white/[0.03] p-1.5">
+        {[{ n: "500+", l: "Members" }, { n: "4.9★", l: "Rating" }, { n: "50+", l: "Classes" }].map((s) => (
+          <div key={s.l} className="text-center">
+            <p className="text-[7px] font-bold text-white">{s.n}</p>
+            <p className="text-[4px] text-white/40">{s.l}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex-1 px-3 py-1.5">
+        <p className="text-[5px] font-semibold text-white/60 mb-1">Popular classes</p>
+        <div className="grid grid-cols-3 gap-1">
+          {[
+            { t: "HIIT Burn", c: "from-emerald-800/60 to-emerald-900/30" },
+            { t: "Power Yoga", c: "from-violet-800/60 to-violet-900/30" },
+            { t: "Spin Class", c: "from-amber-800/60 to-amber-900/30" },
+          ].map((cls) => (
+            <div key={cls.t} className={`rounded bg-gradient-to-br ${cls.c} border border-white/5 p-1`}>
+              <p className="text-[5.5px] font-semibold text-white">{cls.t}</p>
+              <div className="mt-0.5 rounded bg-white/10 py-0.5 text-center text-[4px] text-white/60">Book</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function BrightPathPreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-[#0F1117] text-[8px] leading-tight">
+      <div className="flex items-center justify-between border-b border-white/5 px-3 py-1.5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-blue-500 to-indigo-600 text-[5px] font-bold text-white flex items-center justify-center">B</div>
+          <span className="text-[7px] font-bold text-white">BrightPath <span className="text-blue-400">CRM</span></span>
+        </div>
+        <div className="flex gap-1">
+          <span className="rounded bg-white/10 px-1 py-0.5 text-[4.5px] text-white/50">Leads</span>
+          <span className="rounded bg-blue-600/30 px-1 py-0.5 text-[4.5px] text-blue-300">Pipeline</span>
+          <span className="rounded bg-white/10 px-1 py-0.5 text-[4.5px] text-white/50">Reports</span>
+        </div>
+      </div>
+      <div className="flex-1 px-3 py-2 space-y-1.5">
+        {/* KPI row */}
+        <div className="grid grid-cols-4 gap-1">
+          {[
+            { n: "847", l: "Total Leads", c: "text-white" },
+            { n: "23", l: "New Today", c: "text-emerald-400" },
+            { n: "$142K", l: "Pipeline", c: "text-blue-400" },
+            { n: "68%", l: "Close Rate", c: "text-amber-400" },
+          ].map((kpi) => (
+            <div key={kpi.l} className="rounded-md border border-white/5 bg-white/[0.03] p-1.5 text-center">
+              <p className={`text-[8px] font-bold ${kpi.c}`}>{kpi.n}</p>
+              <p className="text-[4px] text-white/35">{kpi.l}</p>
+            </div>
+          ))}
+        </div>
+        {/* Pipeline columns */}
+        <div className="grid grid-cols-4 gap-1">
+          {[
+            { stage: "New", count: 12, color: "bg-blue-500" },
+            { stage: "Contacted", count: 8, color: "bg-amber-500" },
+            { stage: "Proposal", count: 5, color: "bg-purple-500" },
+            { stage: "Closed", count: 3, color: "bg-emerald-500" },
+          ].map((col) => (
+            <div key={col.stage} className="space-y-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[4.5px] text-white/50">{col.stage}</span>
+                <span className="text-[4.5px] font-bold text-white/70">{col.count}</span>
+              </div>
+              <div className="h-0.5 w-full rounded-full bg-white/5">
+                <div className={`h-full rounded-full ${col.color}`} style={{ width: `${(col.count / 12) * 100}%` }} />
+              </div>
+              {[...Array(Math.min(col.count, 3))].map((_, i) => (
+                <div key={i} className="rounded border border-white/5 bg-white/[0.03] p-0.5">
+                  <div className="h-1 w-3/4 rounded bg-white/10" />
+                  <div className="mt-0.5 h-0.5 w-1/2 rounded bg-white/5" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function VerdantPreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-[#0A0A08] text-[8px] leading-tight">
+      <div className="flex items-center justify-between px-3 py-1.5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-lime-500 to-green-600 text-[5px] font-bold text-white flex items-center justify-center">V</div>
+          <span className="text-[7px] font-bold text-white">Verdant <span className="text-lime-400">Market</span></span>
+        </div>
+        <span className="rounded bg-white/10 px-1.5 py-0.5 text-[5px] text-white/60">Cart (2)</span>
+      </div>
+      <div className="px-3 py-2">
+        <p className="text-[10px] font-bold text-white leading-tight">Organic food,</p>
+        <p className="text-[10px] font-bold bg-gradient-to-r from-lime-400 to-emerald-300 bg-clip-text text-transparent leading-tight">delivered fresh.</p>
+        <div className="mt-1.5 flex gap-1">
+          <span className="rounded bg-lime-600 px-1.5 py-0.5 text-[5px] font-semibold text-white">Shop Now</span>
+          <span className="rounded border border-white/15 px-1.5 py-0.5 text-[5px] text-white/50">Subscribe</span>
+        </div>
+      </div>
+      <div className="mx-3 flex gap-1">
+        {["Fruits", "Vegetables", "Dairy", "Pantry"].map((cat) => (
+          <div key={cat} className="flex-1 rounded bg-white/[0.04] border border-white/5 py-0.5 text-center">
+            <p className="text-[5px] text-white/70">{cat}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex-1 px-3 py-1.5">
+        <div className="grid grid-cols-3 gap-1">
+          {[
+            { name: "Honeycrisp", price: "$4.99", tag: "Organic", c: "from-red-900/40 to-red-950/20" },
+            { name: "Baby Kale", price: "$3.49", tag: "Local", c: "from-green-900/40 to-green-950/20" },
+            { name: "Avocados", price: "$7.99", tag: "Best Seller", c: "from-lime-900/40 to-lime-950/20" },
+          ].map((p) => (
+            <div key={p.name} className={`rounded bg-gradient-to-br ${p.c} border border-white/5 p-1`}>
+              <span className="text-[3.5px] text-lime-400 bg-lime-500/20 rounded-full px-1">{p.tag}</span>
+              <p className="mt-0.5 text-[5.5px] font-semibold text-white">{p.name}</p>
+              <p className="text-[6px] font-bold text-white">{p.price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function TaskFlowPreview() {
+  return (
+    <div className="flex h-full w-full bg-[#0F0F14] text-[8px] leading-tight">
+      {/* Simulate mobile app with centered phone frame */}
+      <div className="m-auto flex h-[90%] w-[55%] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#13131A]">
+        {/* Status bar */}
+        <div className="flex items-center justify-between bg-purple-900/30 px-2 py-1">
+          <span className="text-[5px] text-white/60">9:41</span>
+          <span className="text-[6px] font-bold text-white">TaskFlow</span>
+          <div className="flex gap-0.5">
+            <div className="h-1 w-2 rounded-sm bg-white/40" />
+            <div className="h-1 w-1 rounded-sm bg-white/40" />
+          </div>
+        </div>
+        {/* Header */}
+        <div className="px-2 py-1.5 border-b border-white/5">
+          <p className="text-[7px] font-bold text-white">Active Jobs</p>
+          <p className="text-[4px] text-white/40">3 tasks need attention</p>
+        </div>
+        {/* Task cards */}
+        <div className="flex-1 px-2 py-1 space-y-1 overflow-hidden">
+          {[
+            { title: "Roof Install - 42 Oak St", status: "In Progress", color: "bg-amber-500", pct: "65%" },
+            { title: "Foundation - 18 Elm Dr", status: "Photos Needed", color: "bg-red-500", pct: "30%" },
+            { title: "Framing - 7 Pine Ave", status: "Complete", color: "bg-emerald-500", pct: "100%" },
+          ].map((task) => (
+            <div key={task.title} className="rounded-lg border border-white/5 bg-white/[0.03] p-1.5">
+              <div className="flex items-start justify-between">
+                <p className="text-[5.5px] font-semibold text-white max-w-[70%]">{task.title}</p>
+                <span className={`${task.color} rounded-full px-1 py-0 text-[3.5px] text-white font-medium`}>{task.status}</span>
+              </div>
+              <div className="mt-1 h-1 w-full rounded-full bg-white/5">
+                <div className={`h-full rounded-full ${task.color}/70`} style={{ width: task.pct }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Bottom nav */}
+        <div className="flex justify-around border-t border-white/5 py-1">
+          {["Jobs", "Map", "Camera", "Team"].map((tab) => (
+            <span key={tab} className={`text-[4.5px] ${tab === "Jobs" ? "text-purple-400 font-semibold" : "text-white/30"}`}>{tab}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function HeritagePreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-[#0C0A0E] text-[8px] leading-tight">
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-rose-600 to-rose-800 text-[5px] font-bold text-white flex items-center justify-center">H</div>
+          <span className="text-[7px] font-bold text-white">Heritage <span className="text-rose-400">Law</span></span>
+        </div>
+        <div className="flex gap-1">
+          <span className="rounded bg-white/10 px-1 py-0.5 text-[4.5px] text-white/50">My Cases</span>
+          <span className="rounded bg-white/10 px-1 py-0.5 text-[4.5px] text-white/50">Documents</span>
+          <span className="rounded bg-rose-600/30 px-1 py-0.5 text-[4.5px] text-rose-300">Schedule</span>
+        </div>
+      </div>
+      <div className="flex-1 px-3 py-2 space-y-1.5">
+        {/* Welcome */}
+        <div>
+          <p className="text-[6px] text-white/40">Welcome back,</p>
+          <p className="text-[9px] font-bold text-white">Robert Johnson</p>
+        </div>
+        {/* Case cards */}
+        <div className="space-y-1">
+          {[
+            { title: "Estate Planning", id: "#EP-2847", status: "In Review", color: "bg-amber-500" },
+            { title: "Property Transfer", id: "#PT-1093", status: "Active", color: "bg-emerald-500" },
+          ].map((c) => (
+            <div key={c.id} className="rounded-lg border border-white/5 bg-white/[0.03] p-1.5">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-[6px] font-semibold text-white">{c.title}</p>
+                  <p className="text-[4px] text-white/30">{c.id}</p>
+                </div>
+                <span className={`${c.color} rounded-full px-1 py-0 text-[3.5px] text-white font-medium`}>{c.status}</span>
+              </div>
+              <div className="mt-1 flex gap-1">
+                <div className="rounded bg-white/5 px-1 py-0.5 text-[4px] text-white/40">3 documents</div>
+                <div className="rounded bg-white/5 px-1 py-0.5 text-[4px] text-white/40">Next: Feb 15</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* Recent documents */}
+        <div>
+          <p className="text-[5px] font-semibold text-white/50 mb-0.5">Recent Documents</p>
+          {["Trust_Agreement_v3.pdf", "Property_Deed_Final.pdf"].map((doc) => (
+            <div key={doc} className="flex items-center gap-1 rounded bg-white/[0.02] px-1 py-0.5 mb-0.5">
+              <div className="h-2 w-2 rounded bg-rose-500/20 flex items-center justify-center text-[4px] text-rose-400">P</div>
+              <span className="text-[4.5px] text-white/50">{doc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const previewComponents = [SummitPreview, BrightPathPreview, VerdantPreview, TaskFlowPreview, HeritagePreview]
+
+/* ━━━ Project Data ━━━ */
+
 const projects = [
   {
     title: "Summit Fitness Studio",
@@ -77,6 +332,8 @@ const projects = [
   },
 ]
 
+/* ━━━ Card + Section Components ━━━ */
+
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
@@ -87,17 +344,37 @@ const cardVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
   const [expanded, setExpanded] = useState(false)
+  const Preview = previewComponents[index]
 
   return (
     <motion.div
       variants={cardVariants}
       className="glass-card-hover group flex flex-col overflow-hidden"
     >
-      {/* Color bar top */}
-      <div className={`h-1.5 w-full bg-gradient-to-r ${project.color}`} />
+      {/* Browser frame preview */}
+      <div className="relative">
+        {/* Browser chrome */}
+        <div className="flex items-center gap-1.5 bg-[#1a1a1f] px-3 py-1.5 border-b border-white/5">
+          <div className="flex gap-1">
+            <div className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
+            <div className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
+            <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
+          </div>
+          <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
+            <span className="text-[8px] text-white/25">{project.title.toLowerCase().replace(/\s+/g, "")}.com</span>
+          </div>
+        </div>
+        {/* Preview content */}
+        <div className="aspect-[16/10] overflow-hidden">
+          <Preview />
+        </div>
+        {/* Gradient fade at bottom */}
+        <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-brand-card/90 to-transparent" />
+      </div>
 
+      {/* Card body */}
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <span className="text-xs font-medium uppercase tracking-wider text-brand-subtle">
           {project.type}
@@ -207,8 +484,8 @@ export default function Portfolio() {
           viewport={{ once: true, margin: "-60px" }}
           className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </motion.div>
       </div>
