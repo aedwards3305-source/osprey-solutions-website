@@ -13,7 +13,7 @@ const steps = [
   {
     icon: Search,
     title: "Discovery",
-    timeline: "Week 1",
+    timeline: "Day 1",
     description:
       "We learn your business, goals, audience, and competition. You walk away with a clear project brief and roadmap.",
     deliverables: [
@@ -26,7 +26,7 @@ const steps = [
   {
     icon: PenTool,
     title: "Design",
-    timeline: "Weeks 2\u20133",
+    timeline: "Days 2\u20134",
     description:
       "Wireframes, mockups, and a visual design you approve before a single line of code is written.",
     deliverables: [
@@ -39,7 +39,7 @@ const steps = [
   {
     icon: Code2,
     title: "Build",
-    timeline: "Weeks 3\u20136",
+    timeline: "Days 5\u201310",
     description:
       "We build your project with clean, tested code. You see progress demos every week\u2014no disappearing acts.",
     deliverables: [
@@ -52,7 +52,7 @@ const steps = [
   {
     icon: Rocket,
     title: "Launch",
-    timeline: "Week 6\u20137",
+    timeline: "Days 11\u201314",
     description:
       "Final review, performance optimization, and launch day. We handle hosting setup, DNS, and analytics.",
     deliverables: [
@@ -98,7 +98,7 @@ export default function Process() {
           <span className="section-label">How It Works</span>
           <h2 className="section-title">
             From idea to launch in{" "}
-            <span className="text-gradient-emerald">5 clear steps</span>
+            <span className="text-gradient-emerald">2 weeks</span>
           </h2>
           <p className="section-subtitle mx-auto">
             No mystery. No scope creep. You know exactly what&apos;s happening at
