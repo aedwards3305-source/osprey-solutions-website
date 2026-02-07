@@ -4,9 +4,9 @@ import { motion } from "framer-motion"
 import { ArrowRight, Zap, Shield, Clock, Headphones } from "lucide-react"
 
 const trustItems = [
-  { icon: Zap, text: "Launch in weeks, not months" },
+  { icon: Zap, text: "Launch in under 72 hours" },
   { icon: Shield, text: "You own everything" },
-  { icon: Clock, text: "Transparent timelines" },
+  { icon: Clock, text: "98% on-time delivery" },
   { icon: Headphones, text: "Direct communication" },
 ]
 
@@ -161,7 +161,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
         >
-          <a href="#contact" className="btn-primary text-base px-8 py-4">
+          <a href="/#contact" className="btn-primary text-base px-8 py-4">
             Request a Quote <ArrowRight className="h-5 w-5" />
           </a>
           <a href="/book" className="btn-secondary text-base px-8 py-4">

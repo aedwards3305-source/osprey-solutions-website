@@ -6,6 +6,8 @@ const quickLinks = [
   { href: "/#services", label: "Services" },
   { href: "/#work", label: "Portfolio" },
   { href: "/#process", label: "Process" },
+  { href: "/showcase", label: "Showcase" },
+  { href: "/estimate", label: "Get an Estimate" },
   { href: "/faq", label: "FAQ" },
   { href: "/book", label: "Schedule a Call" },
   { href: "/#contact", label: "Contact" },
