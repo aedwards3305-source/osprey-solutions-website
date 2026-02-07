@@ -255,7 +255,73 @@ function HeritagePreview() {
   )
 }
 
-const previewComponents = [SummitPreview, BrightPathPreview, VerdantPreview, TaskFlowPreview, HeritagePreview]
+function FiresidePreview() {
+  return (
+    <div className="flex h-full w-full flex-col bg-[#0E0906] text-[8px] leading-tight">
+      <div className="flex items-center justify-between px-3 py-1.5">
+        <div className="flex items-center gap-1">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-orange-500 to-red-700 text-[5px] font-bold text-white flex items-center justify-center">F</div>
+          <span className="text-[7px] font-bold text-white">Fireside <span className="text-orange-400">Kitchen</span></span>
+        </div>
+        <div className="flex gap-1">
+          <span className="rounded bg-orange-600 px-1.5 py-0.5 text-[5px] font-semibold text-white">Order Online</span>
+          <span className="rounded border border-white/15 px-1.5 py-0.5 text-[5px] text-white/50">Reserve</span>
+        </div>
+      </div>
+      <div className="px-3 py-1.5">
+        <p className="text-[10px] font-bold text-white leading-tight">Wood-fired flavor,</p>
+        <p className="text-[10px] font-bold bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent leading-tight">delivered to your door.</p>
+        <div className="mt-1.5 flex items-center gap-2">
+          <div className="flex items-center gap-0.5">
+            <span className="text-[5px] text-amber-400">★★★★★</span>
+            <span className="text-[4px] text-white/40">4.9 (320+)</span>
+          </div>
+          <span className="text-[4px] text-white/30">•</span>
+          <span className="text-[4.5px] text-emerald-400">Open now</span>
+          <span className="text-[4px] text-white/30">•</span>
+          <span className="text-[4.5px] text-white/40">25-35 min</span>
+        </div>
+      </div>
+      <div className="mx-3 flex gap-1 mb-1.5">
+        {["Burgers", "Pizza", "Bowls", "Sides", "Drinks"].map((cat, i) => (
+          <div key={cat} className={`flex-1 rounded py-0.5 text-center text-[5px] ${i === 0 ? "bg-orange-600/30 text-orange-300 font-semibold border border-orange-500/30" : "bg-white/[0.04] border border-white/5 text-white/50"}`}>
+            {cat}
+          </div>
+        ))}
+      </div>
+      <div className="flex-1 px-3 space-y-1">
+        {[
+          { name: "Smoked BBQ Burger", desc: "Brisket, cheddar, slaw", price: "$16", tag: "Popular" },
+          { name: "Truffle Mushroom", desc: "Swiss, arugula, aioli", price: "$18", tag: "New" },
+          { name: "Classic Fireside", desc: "Lettuce, tomato, pickle", price: "$14", tag: null },
+        ].map((item) => (
+          <div key={item.name} className="flex items-center justify-between rounded-lg border border-white/5 bg-white/[0.03] p-1.5">
+            <div className="flex-1">
+              <div className="flex items-center gap-1">
+                <p className="text-[5.5px] font-semibold text-white">{item.name}</p>
+                {item.tag && <span className={`text-[3.5px] rounded-full px-1 py-0 font-medium ${item.tag === "Popular" ? "bg-orange-500/20 text-orange-400" : "bg-emerald-500/20 text-emerald-400"}`}>{item.tag}</span>}
+              </div>
+              <p className="text-[4px] text-white/30">{item.desc}</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="text-[6px] font-bold text-white">{item.price}</span>
+              <div className="rounded bg-orange-600/60 px-1 py-0.5 text-[4px] font-semibold text-white">Add</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mx-3 my-1.5 flex items-center justify-between rounded-lg bg-orange-600/20 border border-orange-500/20 p-1.5">
+        <div>
+          <p className="text-[4.5px] text-white/50">Your order</p>
+          <p className="text-[6px] font-bold text-white">2 items &middot; $34.00</p>
+        </div>
+        <div className="rounded bg-orange-600 px-2 py-0.5 text-[5px] font-semibold text-white">Checkout →</div>
+      </div>
+    </div>
+  )
+}
+
+const previewComponents = [SummitPreview, BrightPathPreview, VerdantPreview, TaskFlowPreview, HeritagePreview, FiresidePreview]
 
 /* ━━━ Project Data ━━━ */
 
@@ -328,6 +394,20 @@ const projects = [
       problem: "The firm\u2019s outdated site didn\u2019t reflect their premium brand. Clients called constantly for case updates, overwhelming the support staff.",
       solution: "We redesigned the website to match their prestige and added a secure client portal with document uploads, appointment scheduling, and real-time case status tracking.",
       results: "Status inquiry calls dropped 60%. Client satisfaction scores improved by 35%. The firm signed 25% more new clients from organic website traffic.",
+    },
+  },
+  {
+    title: "Fireside Kitchen",
+    type: "Restaurant + Online Ordering",
+    description:
+      "A full-service restaurant website with online ordering, real-time menu management, table reservations, and integrated delivery tracking for a popular wood-fired grill.",
+    outcome: "85% increase in takeout revenue",
+    tech: ["Next.js", "Stripe", "Square POS", "Twilio"],
+    color: "from-orange-500/20 to-red-500/10",
+    caseStudy: {
+      problem: "Fireside Kitchen was losing takeout orders to third-party apps that charged 30% commission. Their website was a static page with a PDF menu and no way to order online.",
+      solution: "We built a branded ordering platform with real-time menu updates, online payments, table reservations, order-ahead scheduling, and SMS order notifications\u2014all synced with their Square POS.",
+      results: "Takeout revenue jumped 85% in 8 weeks. Third-party app fees dropped by $4,200/month. Table reservations increased 50% and no-shows fell thanks to SMS confirmations.",
     },
   },
 ]
