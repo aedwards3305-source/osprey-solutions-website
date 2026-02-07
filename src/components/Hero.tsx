@@ -171,7 +171,7 @@ function HeroBeforeAfter() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.6 }}
-      className="relative mx-auto mt-16 mb-8 max-w-3xl"
+      className="relative mx-auto mt-16 mb-8 max-w-6xl"
     >
       {/* Glow */}
       <div className="absolute -inset-4 rounded-3xl bg-brand-emerald/5 blur-2xl" />
@@ -193,7 +193,7 @@ function HeroBeforeAfter() {
         {/* Slider area */}
         <div
           ref={containerRef}
-          className="relative aspect-[16/10] cursor-col-resize select-none overflow-hidden"
+          className="relative aspect-[16/11] cursor-col-resize select-none overflow-hidden"
           onMouseDown={(e) => handleStart(e.clientX)}
           onTouchStart={(e) => handleStart(e.touches[0].clientX)}
         >
