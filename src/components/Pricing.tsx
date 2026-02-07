@@ -181,9 +181,7 @@ export default function Pricing() {
 
               {/* CTA */}
               <a
-                href={plan.isCustom ? "https://calendly.com/osprey-solutions/intro" : "#contact"}
-                target={plan.isCustom ? "_blank" : undefined}
-                rel={plan.isCustom ? "noopener noreferrer" : undefined}
+                href={plan.isCustom ? "#book" : "#contact"}
                 className={`mt-8 ${
                   plan.highlighted ? "btn-primary" : "btn-secondary"
                 } w-full text-sm`}

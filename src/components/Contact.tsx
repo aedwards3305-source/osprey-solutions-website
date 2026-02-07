@@ -188,9 +188,7 @@ export default function Contact() {
                   Prefer to talk live?
                 </p>
                 <a
-                  href="https://calendly.com/osprey-solutions/intro"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#book"
                   className="btn-secondary mt-3 w-full text-sm"
                 >
                   <Calendar className="h-4 w-4" />

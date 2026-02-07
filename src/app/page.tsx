@@ -10,6 +10,7 @@ import StatsCounter from "@/components/StatsCounter"
 import Process from "@/components/Process"
 import Testimonials from "@/components/Testimonials"
 import CostEstimator from "@/components/CostEstimator"
+import BookCall from "@/components/BookCall"
 import FAQ from "@/components/FAQ"
 import LeadMagnet from "@/components/LeadMagnet"
 import Contact from "@/components/Contact"
@@ -31,6 +32,7 @@ export default function Home() {
         <Process />
         <Testimonials />
         <CostEstimator />
+        <BookCall />
         <FAQ />
         <LeadMagnet />
         <Contact />

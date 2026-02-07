@@ -65,12 +65,7 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="https://calendly.com/osprey-solutions/intro"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost text-sm"
-          >
+          <a href="#book" className="btn-ghost text-sm">
             Book a Call
           </a>
           <a href="#contact" className="btn-primary text-sm">
@@ -111,9 +106,7 @@ export default function Header() {
               ))}
               <div className="mt-4 flex flex-col gap-3 border-t border-brand-border/30 pt-4">
                 <a
-                  href="https://calendly.com/osprey-solutions/intro"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#book"
                   className="btn-secondary text-sm justify-center"
                   onClick={() => setMobileOpen(false)}
                 >

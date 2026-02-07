@@ -164,12 +164,7 @@ export default function Hero() {
           <a href="#contact" className="btn-primary text-base px-8 py-4">
             Request a Quote <ArrowRight className="h-5 w-5" />
           </a>
-          <a
-            href="https://calendly.com/osprey-solutions/intro"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-secondary text-base px-8 py-4"
-          >
+          <a href="#book" className="btn-secondary text-base px-8 py-4">
             Book a Call
           </a>
         </motion.div>
