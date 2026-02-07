@@ -58,7 +58,7 @@ export default function LeadMagnet() {
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-brand-muted">
               Tell us your email and we&apos;ll send you a personalized project
-              outline\u2014what to build, what it costs, and how fast we can ship it.
+              outline&mdash;what to build, what it costs, and how fast we can ship it.
               No commitment.
             </p>
 
@@ -66,7 +66,7 @@ export default function LeadMagnet() {
               <div className="mt-8 flex items-center justify-center gap-2 text-brand-emerald-glow">
                 <CheckCircle2 className="h-5 w-5" />
                 <span className="font-medium">
-                  Check your inbox\u2014your build plan is on the way.
+                  Check your inbox&mdash;your build plan is on the way.
                 </span>
               </div>
             ) : (

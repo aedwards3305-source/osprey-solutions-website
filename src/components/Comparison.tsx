@@ -87,14 +87,14 @@ export default function Comparison() {
       <div className="section-container">
         {/* Header */}
         <div className="text-center">
-          <span className="section-label">Why Osprey</span>
+          <span className="section-label">Why Osprey Solutions</span>
           <h2 className="section-title">
             Better than DIY.{" "}
             <span className="text-gradient-gold">Faster than agencies.</span>
           </h2>
           <p className="section-subtitle mx-auto">
             DIY platforms leave you with cookie-cutter sites. Big agencies charge
-            $50k and take 6 months. Osprey gives you agency quality at a pace and
+            $50k and take 6 months. Osprey Solutions gives you agency quality at a pace and
             price that actually works.
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function Comparison() {
                       <Crown className="h-3.5 w-3.5 text-brand-gold" />
                     </div>
                     <span className="text-sm font-semibold text-brand-emerald-glow">
-                      Osprey
+                      Osprey Solutions
                     </span>
                     <p className="mt-0.5 text-xs text-brand-emerald-glow/60">
                       Best of all worlds

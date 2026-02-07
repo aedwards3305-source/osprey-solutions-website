@@ -10,7 +10,7 @@ const testimonials = [
     role: "Owner",
     business: "Summit Fitness Studio",
     quote:
-      "Osprey took our outdated website and turned it into a booking machine. Online sign-ups tripled in the first month, and the whole process was painless. They kept us in the loop every step of the way.",
+      "Osprey Solutions took our outdated website and turned it into a booking machine. Online sign-ups tripled in the first month, and the whole process was painless. They kept us in the loop every step of the way.",
     result: "3x online bookings",
   },
   {
@@ -18,7 +18,7 @@ const testimonials = [
     role: "Founder",
     business: "BrightPath Consulting",
     quote:
-      "We needed a CRM that actually fit how we work\u2014not another off-the-shelf tool we\u2019d fight with. Osprey built exactly what we asked for, on time, and it\u2019s saving our team 15 hours a week.",
+      "We needed a CRM that actually fit how we work\u2014not another off-the-shelf tool we\u2019d fight with. Osprey Solutions built exactly what we asked for, on time, and it\u2019s saving our team 15 hours a week.",
     result: "15 hrs/week saved",
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     role: "Operations Director",
     business: "Verdant Market",
     quote:
-      "The team at Osprey understood our business from day one. Our new e-commerce platform is fast, beautiful, and our average order value jumped 42%. Best investment we\u2019ve made this year.",
+      "The team at Osprey Solutions understood our business from day one. Our new e-commerce platform is fast, beautiful, and our average order value jumped 42%. Best investment we\u2019ve made this year.",
     result: "42% higher AOV",
   },
   {
@@ -34,7 +34,7 @@ const testimonials = [
     role: "Managing Partner",
     business: "Heritage Law Group",
     quote:
-      "Our client portal cut status-inquiry calls by 60%. Osprey delivered ahead of schedule and the quality blew us away. We\u2019ve already referred two other firms.",
+      "Our client portal cut status-inquiry calls by 60%. Osprey Solutions delivered ahead of schedule and the quality blew us away. We\u2019ve already referred two other firms.",
     result: "60% fewer support calls",
   },
   {
@@ -42,7 +42,7 @@ const testimonials = [
     role: "CEO",
     business: "Bloom Floral Co.",
     quote:
-      "We went from zero online presence to a beautiful e-commerce site in five weeks. Osprey handled everything\u2014design, payments, shipping logic. Sales doubled in our first quarter online.",
+      "We went from zero online presence to a beautiful e-commerce site in five weeks. Osprey Solutions handled everything\u2014design, payments, shipping logic. Sales doubled in our first quarter online.",
     result: "2x revenue in 90 days",
   },
 ]
@@ -102,7 +102,7 @@ export default function Testimonials() {
           </h2>
           <p className="section-subtitle mx-auto">
             Don&apos;t take our word for it&mdash;hear from founders and operators
-            who chose Osprey.
+            who chose Osprey Solutions.
           </p>
         </div>
 

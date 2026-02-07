@@ -102,7 +102,7 @@ export default function Process() {
           </h2>
           <p className="section-subtitle mx-auto">
             No mystery. No scope creep. You know exactly what&apos;s happening at
-            every stage\u2014and you approve before we move forward.
+            every stage&mdash;and you approve before we move forward.
           </p>
         </div>
 

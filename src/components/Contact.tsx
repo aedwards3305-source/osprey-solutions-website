@@ -141,7 +141,7 @@ export default function Contact() {
             </h2>
             <p className="section-subtitle mx-auto">
               Tell us about your project and we&apos;ll get back to you with a
-              clear plan, timeline, and quote\u2014no obligation.
+              clear plan, timeline, and quote&mdash;no obligation.
             </p>
           </div>
 
