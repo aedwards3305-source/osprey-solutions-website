@@ -79,10 +79,10 @@ export default function Testimonials() {
     []
   )
 
-  // Auto-scroll every 6 seconds
+  // Auto-scroll every 3.5 seconds
   useEffect(() => {
     if (isPaused) return
-    const timer = setInterval(() => paginate(1), 6000)
+    const timer = setInterval(() => paginate(1), 3500)
     return () => clearInterval(timer)
   }, [isPaused, paginate])
 
