@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ArrowRight } from "lucide-react"
 
 const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#process", label: "Process" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/#process", label: "Process" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/book", label: "Schedule" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export default function Header() {
@@ -41,7 +42,7 @@ export default function Header() {
     >
       <div className="section-container flex h-16 items-center justify-between sm:h-20">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5">
+        <a href="/" className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-gradient">
             <span className="text-lg font-bold text-white">O</span>
           </div>
@@ -65,10 +66,10 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#book" className="btn-ghost text-sm">
+          <a href="/book" className="btn-ghost text-sm">
             Book a Call
           </a>
-          <a href="#contact" className="btn-primary text-sm">
+          <a href="/#contact" className="btn-primary text-sm">
             Request a Quote <ArrowRight className="h-4 w-4" />
           </a>
         </div>
@@ -106,7 +107,7 @@ export default function Header() {
               ))}
               <div className="mt-4 flex flex-col gap-3 border-t border-brand-border/30 pt-4">
                 <a
-                  href="#book"
+                  href="/book"
                   className="btn-secondary text-sm justify-center"
                   onClick={() => setMobileOpen(false)}
                 >

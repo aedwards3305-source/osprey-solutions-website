@@ -188,7 +188,7 @@ export default function Contact() {
                   Prefer to talk live?
                 </p>
                 <a
-                  href="#book"
+                  href="/book"
                   className="btn-secondary mt-3 w-full text-sm"
                 >
                   <Calendar className="h-4 w-4" />

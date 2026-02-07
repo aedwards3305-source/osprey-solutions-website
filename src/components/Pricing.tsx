@@ -181,7 +181,7 @@ export default function Pricing() {
 
               {/* CTA */}
               <a
-                href={plan.isCustom ? "#book" : "#contact"}
+                href={plan.isCustom ? "/book" : "#contact"}
                 className={`mt-8 ${
                   plan.highlighted ? "btn-primary" : "btn-secondary"
                 } w-full text-sm`}

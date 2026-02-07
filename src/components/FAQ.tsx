@@ -133,7 +133,7 @@ export default function FAQ() {
             <p className="text-brand-muted">
               Still have questions?{" "}
               <a
-                href="#contact"
+                href="/#contact"
                 className="font-medium text-brand-emerald-glow underline underline-offset-4 hover:text-brand-emerald-light"
               >
                 Reach out
