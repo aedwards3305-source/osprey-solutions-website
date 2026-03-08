@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ospreysolutions.io"),
+  metadataBase: new URL("https://ospreysolutionsllc.com"),
   title: "Osprey Solutions | Apps, Websites & AI-Powered Systems That Win Customers",
   description:
     "Osprey Solutions builds custom apps, websites, and AI-powered business systems for small businesses and growing teams. From AI chatbots to smart automation — faster than DIY, better than big agencies.",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Osprey Solutions | Apps, Websites & AI-Powered Systems",
     description:
       "Custom apps, websites, and AI-powered business systems for small businesses and growing teams. Faster than DIY, better than big agencies.",
-    url: "https://ospreysolutions.io",
+    url: "https://ospreysolutionsllc.com",
     siteName: "Osprey Solutions",
     locale: "en_US",
     type: "website",
@@ -51,7 +51,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
 }
 
@@ -66,8 +67,8 @@ export default function RootLayout({
     name: "Osprey Solutions",
     description:
       "Custom apps, websites, and AI-powered business solutions for small businesses and growing teams.",
-    url: "https://ospreysolutions.io",
-    email: "hello@ospreysolutions.io",
+    url: "https://ospreysolutionsllc.com",
+    email: "antonio@ospreysolutionsllc.com",
     areaServed: {
       "@type": "Country",
       name: "United States",

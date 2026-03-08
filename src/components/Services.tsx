@@ -7,7 +7,7 @@ import {
   Monitor,
   Workflow,
   Puzzle,
-  Palette,
+  Search,
 } from "lucide-react"
 
 const services = [
@@ -47,11 +47,11 @@ const services = [
     details: ["API integrations", "Payment systems", "CRM connections", "Third-party APIs"],
   },
   {
-    icon: Palette,
-    title: "Branding & UX",
+    icon: Search,
+    title: "SEO",
     description:
-      "Clean, modern design that makes your business look as good as it performs.",
-    details: ["UI/UX design", "Brand identity", "Design systems", "Prototyping"],
+      "Get found on Google. We optimize your site structure, content, and technical performance so customers find you first.",
+    details: ["Technical SEO", "On-page optimization", "Local SEO", "Analytics & reporting"],
   },
 ]
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { ArrowRight, MapPin, Mail, Phone } from "lucide-react"
+import Image from "next/image"
 
 const quickLinks = [
   { href: "/#services", label: "Services" },
@@ -25,10 +26,14 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <a href="/" className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-gradient">
-                <span className="text-lg font-bold text-white">O</span>
-              </div>
+            <a href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Osprey Solutions"
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
+              />
               <span className="text-lg font-bold tracking-tight text-brand-text">
                 Osprey Solutions<span className="text-brand-emerald-glow">.</span>
               </span>
@@ -88,10 +93,10 @@ export default function Footer() {
               <li className="flex items-start gap-2.5">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-subtle" />
                 <a
-                  href="mailto:hello@ospreysolutions.io"
+                  href="mailto:antonio@ospreysolutionsllc.com"
                   className="text-sm text-brand-muted transition-colors hover:text-brand-text"
                 >
-                  hello@ospreysolutions.io
+                  antonio@ospreysolutionsllc.com
                 </a>
               </li>
               <li className="flex items-start gap-2.5">

@@ -199,10 +199,10 @@ export default function Contact() {
               <p className="text-center text-sm text-brand-subtle lg:text-left">
                 Or email us directly at{" "}
                 <a
-                  href="mailto:hello@ospreysolutions.io"
+                  href="mailto:antonio@ospreysolutionsllc.com"
                   className="text-brand-emerald-glow underline underline-offset-4"
                 >
-                  hello@ospreysolutions.io
+                  antonio@ospreysolutionsllc.com
                 </a>
               </p>
             </div>
@@ -415,10 +415,10 @@ export default function Contact() {
                     <p className="text-center text-sm text-red-400">
                       Something went wrong. Please try again or email us at{" "}
                       <a
-                        href="mailto:hello@ospreysolutions.io"
+                        href="mailto:antonio@ospreysolutionsllc.com"
                         className="underline"
                       >
-                        hello@ospreysolutions.io
+                        antonio@ospreysolutionsllc.com
                       </a>
                     </p>
                   )}

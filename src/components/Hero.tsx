@@ -13,46 +13,111 @@ const trustItems = [
 
 function BeforeSite() {
   return (
-    <div className="flex h-full w-full flex-col bg-[#f5f5f0] text-[8px] leading-tight">
-      {/* Ugly nav */}
-      <div className="flex items-center justify-between bg-[#1a3a5c] px-3 py-1.5">
-        <span className="text-[7px] font-bold text-white tracking-wide">JOE&apos;S PLUMBING</span>
+    <div className="flex h-full w-full flex-col bg-[#f5f5f0] leading-snug overflow-hidden">
+      {/* Top bar */}
+      <div className="flex items-center justify-between bg-[#0d1f33] px-4 py-1">
+        <span className="text-[7px] text-blue-200/50">Call us: (555) 123-4567</span>
         <div className="flex gap-2">
-          {["Home", "About", "Services", "Gallery", "Testimonials", "Blog", "FAQ", "Contact"].map((n) => (
-            <span key={n} className="text-[4.5px] text-blue-200/60">{n}</span>
+          <span className="text-[7px] text-blue-200/50">Mon-Fri 8am-5pm</span>
+          <span className="text-[7px] text-blue-200/50">FB</span>
+          <span className="text-[7px] text-blue-200/50">YT</span>
+        </div>
+      </div>
+      {/* Nav */}
+      <div className="flex items-center justify-between bg-[#1a3a5c] px-4 py-2">
+        <span className="text-[12px] font-bold text-white tracking-wide" style={{ fontFamily: "serif" }}>JOE&apos;S PLUMBING</span>
+        <div className="flex gap-3">
+          {["Home", "About Us", "Services", "Gallery", "Testimonials", "Blog", "FAQ", "Contact Us"].map((n) => (
+            <span key={n} className="text-[8px] text-blue-200/70 hover:text-white">{n}</span>
           ))}
         </div>
       </div>
       {/* Hero banner */}
-      <div className="bg-gradient-to-r from-[#1a3a5c] to-[#2a5a8c] px-4 py-3 text-center">
-        <p className="text-[11px] font-bold text-white" style={{ fontFamily: "serif" }}>Welcome To Joe&apos;s Plumbing Services LLC</p>
-        <p className="mt-0.5 text-[5px] text-blue-200/50">Serving the greater metro area since 1987 &bull; Licensed &amp; Insured &bull; Call us today!</p>
-        <div className="mx-auto mt-1.5 flex justify-center gap-1.5">
-          <span className="rounded bg-yellow-500 px-2 py-0.5 text-[5px] font-bold text-black shadow">CALL NOW!!!</span>
-          <span className="rounded bg-red-600 px-2 py-0.5 text-[5px] font-bold text-white shadow">FREE QUOTE</span>
+      <div className="bg-gradient-to-r from-[#1a3a5c] to-[#2a5a8c] px-6 py-5 text-center">
+        <p className="text-[18px] font-bold text-white" style={{ fontFamily: "serif" }}>Welcome To Joe&apos;s Plumbing Services LLC</p>
+        <p className="mt-1 text-[9px] text-blue-200/60">Serving the greater metro area since 1987 &bull; Licensed &amp; Insured &bull; BBB Accredited &bull; Call us today!</p>
+        <div className="mx-auto mt-2.5 flex justify-center gap-2">
+          <span className="rounded bg-yellow-500 px-3 py-1 text-[9px] font-bold text-black shadow animate-pulse">CALL NOW!!!</span>
+          <span className="rounded bg-red-600 px-3 py-1 text-[9px] font-bold text-white shadow">FREE QUOTE</span>
+          <span className="rounded bg-green-600 px-3 py-1 text-[9px] font-bold text-white shadow">COUPONS</span>
         </div>
       </div>
       {/* Content area */}
-      <div className="flex-1 px-3 py-2 space-y-1.5">
-        {/* Service boxes */}
-        <div className="grid grid-cols-3 gap-1">
-          {["Drain Cleaning", "Water Heaters", "Emergency 24/7"].map((s) => (
-            <div key={s} className="rounded border border-gray-300 bg-white p-1.5 text-center shadow-sm">
-              <div className="mx-auto mb-0.5 h-4 w-4 rounded-full bg-[#1a3a5c]/20" />
-              <p className="text-[5.5px] font-bold text-[#1a3a5c]">{s}</p>
-              <p className="text-[4px] text-gray-400 mt-0.5">Click here to learn more about our {s.toLowerCase()} services</p>
+      <div className="flex flex-1 gap-3 px-4 py-3">
+        {/* Main content */}
+        <div className="flex-1 space-y-3">
+          {/* Service boxes */}
+          <div className="grid grid-cols-3 gap-2">
+            {["Drain Cleaning", "Water Heaters", "Emergency 24/7", "Pipe Repair", "Bathroom Remodel", "Sewer Line"].map((s) => (
+              <div key={s} className="rounded border border-gray-300 bg-white p-2 text-center shadow-sm">
+                <div className="mx-auto mb-1 h-6 w-6 rounded-full bg-[#1a3a5c]/15 flex items-center justify-center">
+                  <span className="text-[8px] text-[#1a3a5c]">🔧</span>
+                </div>
+                <p className="text-[9px] font-bold text-[#1a3a5c]">{s}</p>
+                <p className="text-[6px] text-gray-400 mt-0.5">Click here to learn more</p>
+              </div>
+            ))}
+          </div>
+          {/* About blurb */}
+          <div className="rounded bg-white p-3 shadow-sm border border-gray-200">
+            <p className="text-[11px] font-bold text-[#1a3a5c]" style={{ fontFamily: "serif" }}>Why Choose Joe&apos;s Plumbing?</p>
+            <p className="text-[7px] text-gray-500 mt-1 leading-relaxed">With over 35 years of experience serving homeowners and businesses in the greater metro area, Joe&apos;s Plumbing has built a reputation for reliable, honest, and affordable plumbing services. We treat every home like our own!</p>
+            <div className="mt-2 flex gap-3">
+              <div className="text-center">
+                <p className="text-[10px] font-bold text-[#1a3a5c]">35+</p>
+                <p className="text-[6px] text-gray-400">Years Exp.</p>
+              </div>
+              <div className="text-center">
+                <p className="text-[10px] font-bold text-[#1a3a5c]">5,000+</p>
+                <p className="text-[6px] text-gray-400">Jobs Done</p>
+              </div>
+              <div className="text-center">
+                <p className="text-[10px] font-bold text-[#1a3a5c]">4.2★</p>
+                <p className="text-[6px] text-gray-400">Google</p>
+              </div>
             </div>
-          ))}
+          </div>
+          {/* Testimonials */}
+          <div className="rounded border-l-2 border-yellow-500 bg-white p-2.5 shadow-sm">
+            <p className="text-[8px] text-gray-500 italic">&quot;Joe fixed our sink. He showed up and did a good job. Would recommend.&quot;</p>
+            <p className="text-[6px] text-gray-400 mt-1">- Happy Customer, Google Review (2019)</p>
+          </div>
+          <div className="rounded border-l-2 border-yellow-500 bg-white p-2.5 shadow-sm">
+            <p className="text-[8px] text-gray-500 italic">&quot;Called them for an emergency and they came next day. Pretty good price.&quot;</p>
+            <p className="text-[6px] text-gray-400 mt-1">- Mike T., Yelp Review</p>
+          </div>
         </div>
-        {/* Testimonial */}
-        <div className="rounded border-l-2 border-yellow-500 bg-white p-1.5 shadow-sm">
-          <p className="text-[5px] text-gray-500 italic">&quot;Joe fixed our sink. Good job.&quot;</p>
-          <p className="text-[4px] text-gray-400 mt-0.5">- Happy Customer, Google Review</p>
+        {/* Sidebar */}
+        <div className="w-[22%] space-y-2.5">
+          <div className="rounded bg-[#1a3a5c] p-2.5 text-center">
+            <p className="text-[9px] font-bold text-yellow-400">SPECIAL OFFER!</p>
+            <p className="text-[7px] text-white mt-0.5">$25 OFF</p>
+            <p className="text-[6px] text-blue-200/60">Any service over $100</p>
+            <p className="text-[5px] text-blue-200/40 mt-1">Expires 12/31/2019</p>
+          </div>
+          <div className="rounded border border-gray-300 bg-white p-2.5">
+            <p className="text-[8px] font-bold text-[#1a3a5c] text-center">Request a Quote</p>
+            <div className="mt-1.5 space-y-1">
+              <div className="h-4 rounded border border-gray-300 bg-gray-50" />
+              <div className="h-4 rounded border border-gray-300 bg-gray-50" />
+              <div className="h-4 rounded border border-gray-300 bg-gray-50" />
+              <div className="h-8 rounded border border-gray-300 bg-gray-50" />
+              <div className="rounded bg-[#1a3a5c] py-1 text-center text-[7px] font-bold text-white">SUBMIT</div>
+            </div>
+          </div>
+          <div className="rounded border border-gray-300 bg-white p-2 text-center">
+            <p className="text-[7px] text-gray-400">Visitors</p>
+            <p className="text-[10px] font-bold text-gray-600 font-mono">004,523</p>
+          </div>
+          <div className="rounded border border-gray-300 bg-white p-2 text-center">
+            <p className="text-[7px] text-gray-400">BBB Rating</p>
+            <p className="text-[10px] font-bold text-green-700">A+</p>
+          </div>
         </div>
-        {/* Footer-ish */}
-        <div className="text-center text-[4px] text-gray-400">
-          <p>Copyright 2019 Joe&apos;s Plumbing LLC | All Rights Reserved | Site by Joe&apos;s nephew</p>
-        </div>
+      </div>
+      {/* Footer */}
+      <div className="bg-[#0d1f33] px-4 py-2 text-center">
+        <p className="text-[6px] text-blue-200/40">Copyright 2019 Joe&apos;s Plumbing LLC | All Rights Reserved | Site by Joe&apos;s nephew</p>
       </div>
     </div>
   )
@@ -60,64 +125,144 @@ function BeforeSite() {
 
 function AfterSite() {
   return (
-    <div className="flex h-full w-full flex-col bg-[#0A0A0A] text-[8px] leading-tight">
+    <div className="flex h-full w-full flex-col bg-[#0A0A0A] leading-snug overflow-hidden">
       {/* Modern nav */}
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/5">
-        <div className="flex items-center gap-1">
-          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-emerald-500 to-emerald-700 text-[5px] font-bold text-white flex items-center justify-center">J</div>
-          <span className="text-[7px] font-bold text-white">Joe&apos;s <span className="text-emerald-400">Plumbing</span></span>
+      <div className="flex items-center justify-between px-5 py-2 border-b border-white/5">
+        <div className="flex items-center gap-1.5">
+          <div className="h-5 w-5 rounded-md bg-gradient-to-br from-emerald-500 to-emerald-700 text-[8px] font-bold text-white flex items-center justify-center">J</div>
+          <span className="text-[11px] font-bold text-white">Joe&apos;s <span className="text-emerald-400">Plumbing</span></span>
         </div>
-        <div className="flex items-center gap-2">
-          {["Services", "Work", "Reviews"].map((n) => (
-            <span key={n} className="text-[5px] text-white/40">{n}</span>
+        <div className="flex items-center gap-4">
+          {["Services", "Work", "Reviews", "About"].map((n) => (
+            <span key={n} className="text-[8px] text-white/40">{n}</span>
           ))}
-          <span className="rounded bg-emerald-600 px-1.5 py-0.5 text-[5px] font-semibold text-white">Get a Quote</span>
+          <span className="rounded-md bg-emerald-600 px-2.5 py-1 text-[8px] font-semibold text-white">Get a Quote</span>
         </div>
       </div>
       {/* Hero */}
-      <div className="px-3 py-2.5">
-        <span className="rounded-full bg-emerald-500/15 px-1.5 py-0.5 text-[4.5px] text-emerald-400">Now booking same-day service</span>
-        <p className="mt-1.5 text-[11px] font-bold text-white leading-tight">Plumbing done right.</p>
-        <p className="text-[11px] font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent leading-tight">On time, every time.</p>
-        <p className="mt-1 text-[5px] text-white/40">Licensed pros. Transparent pricing. 4.9-star rated.</p>
+      <div className="flex px-5 pt-4 pb-3">
+        <div className="flex-1">
+          <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[6px] text-emerald-400 font-medium">Licensed &amp; Insured &bull; Same-Day Available</span>
+          <p className="mt-2 text-[20px] font-bold text-white leading-[1.1]">Plumbing done right.</p>
+          <p className="text-[20px] font-bold bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent leading-[1.1]">On time, every time.</p>
+          <p className="mt-1.5 text-[7px] text-white/40 max-w-[85%] leading-relaxed">Trusted by 2,400+ homeowners in the DMV area. Transparent pricing, no hidden fees, and a 100% satisfaction guarantee on every job.</p>
+          <div className="mt-2.5 flex gap-2 items-center">
+            <span className="rounded-md bg-emerald-600 px-3 py-1.5 text-[8px] font-semibold text-white">Book Now →</span>
+            <span className="rounded-md border border-white/10 px-3 py-1.5 text-[8px] font-medium text-white/60">Call (555) 123-4567</span>
+          </div>
+        </div>
+        {/* Hero right - quick form */}
+        <div className="w-[35%] rounded-xl border border-white/10 bg-white/[0.03] p-3">
+          <p className="text-[9px] font-bold text-white text-center">Get a Free Estimate</p>
+          <p className="text-[5px] text-white/30 text-center mt-0.5">Response within 2 hours</p>
+          <div className="mt-2 space-y-1.5">
+            <div className="h-4 rounded-md border border-white/10 bg-white/[0.03] px-1.5 flex items-center">
+              <span className="text-[5px] text-white/20">Full name</span>
+            </div>
+            <div className="h-4 rounded-md border border-white/10 bg-white/[0.03] px-1.5 flex items-center">
+              <span className="text-[5px] text-white/20">Phone number</span>
+            </div>
+            <div className="h-4 rounded-md border border-white/10 bg-white/[0.03] px-1.5 flex items-center">
+              <span className="text-[5px] text-white/20">Service needed</span>
+            </div>
+            <div className="rounded-md bg-emerald-600 py-1 text-center text-[7px] font-semibold text-white">Get My Free Quote</div>
+          </div>
+        </div>
       </div>
       {/* Stats */}
-      <div className="mx-3 grid grid-cols-3 gap-1">
-        {[{ n: "2,400+", l: "Jobs Done" }, { n: "4.9★", l: "Rating" }, { n: "Same Day", l: "Service" }].map((s) => (
-          <div key={s.l} className="rounded-lg border border-white/5 bg-white/[0.03] p-1.5 text-center">
-            <p className="text-[7px] font-bold text-white">{s.n}</p>
-            <p className="text-[4px] text-white/35">{s.l}</p>
+      <div className="mx-5 grid grid-cols-4 gap-1.5">
+        {[{ n: "2,400+", l: "Jobs Done" }, { n: "4.9★", l: "Google" }, { n: "15+", l: "Years" }, { n: "<2hr", l: "Response" }].map((s) => (
+          <div key={s.l} className="rounded-lg border border-white/5 bg-white/[0.03] py-1.5 text-center">
+            <p className="text-[10px] font-bold text-white">{s.n}</p>
+            <p className="text-[5px] text-white/30">{s.l}</p>
           </div>
         ))}
       </div>
-      {/* Growth chart */}
-      <div className="mx-3 mt-1.5 rounded-lg border border-white/5 bg-white/[0.02] p-2">
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-[5px] font-semibold text-white/50">Monthly Bookings</span>
-          <span className="text-[5px] font-bold text-emerald-400">+340%</span>
+      {/* Services section */}
+      <div className="mx-5 mt-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-[6px] font-medium text-emerald-400 uppercase tracking-wider">Our Services</p>
+            <p className="text-[11px] font-bold text-white mt-0.5">What we do best</p>
+          </div>
+          <span className="text-[6px] text-white/30">View all services →</span>
         </div>
-        <div className="flex items-end gap-[3px] h-10">
-          {[15, 18, 22, 30, 35, 45, 42, 55, 60, 72, 68, 85].map((h, i) => (
-            <div key={i} className="flex-1 rounded-t bg-gradient-to-t from-emerald-600/50 to-emerald-400/70" style={{ height: `${h}%` }} />
+        <div className="mt-2 grid grid-cols-4 gap-1.5">
+          {[
+            { t: "Emergency Repair", i: "🚨" },
+            { t: "Drain Cleaning", i: "🪠" },
+            { t: "Water Heaters", i: "🔥" },
+            { t: "Bathroom Remodel", i: "🛁" },
+          ].map((svc) => (
+            <div key={svc.t} className="rounded-lg border border-white/5 bg-white/[0.03] p-2 text-center">
+              <span className="text-[11px]">{svc.i}</span>
+              <p className="text-[6px] font-semibold text-white mt-1">{svc.t}</p>
+              <p className="text-[4px] text-emerald-400/60 mt-0.5">Learn more →</p>
+            </div>
           ))}
         </div>
-        <div className="flex justify-between mt-0.5">
-          <span className="text-[3.5px] text-white/20">Jan</span>
-          <span className="text-[3.5px] text-white/20">Dec</span>
+      </div>
+      {/* Why Choose Us */}
+      <div className="mx-5 mt-3 rounded-xl border border-white/5 bg-gradient-to-br from-emerald-950/30 to-transparent p-3">
+        <p className="text-[6px] font-medium text-emerald-400 uppercase tracking-wider">Why Joe&apos;s?</p>
+        <p className="text-[10px] font-bold text-white mt-0.5">The difference is in the details</p>
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          {[
+            { t: "Upfront Pricing", d: "Know the cost before we start. No surprises, ever." },
+            { t: "Licensed Pros", d: "Background-checked, certified plumbers on every job." },
+            { t: "Guaranteed Work", d: "Not happy? We'll come back and make it right, free." },
+          ].map((item) => (
+            <div key={item.t}>
+              <p className="text-[6px] font-semibold text-white">{item.t}</p>
+              <p className="text-[4.5px] text-white/30 mt-0.5 leading-relaxed">{item.d}</p>
+            </div>
+          ))}
         </div>
       </div>
-      {/* Service cards */}
-      <div className="mx-3 mt-1.5 grid grid-cols-3 gap-1">
-        {[
-          { t: "Emergency", c: "from-red-900/40 to-red-950/20" },
-          { t: "Remodel", c: "from-blue-900/40 to-blue-950/20" },
-          { t: "Maintenance", c: "from-emerald-900/40 to-emerald-950/20" },
-        ].map((svc) => (
-          <div key={svc.t} className={`rounded-lg bg-gradient-to-br ${svc.c} border border-white/5 p-1.5`}>
-            <p className="text-[5.5px] font-semibold text-white">{svc.t}</p>
-            <div className="mt-0.5 rounded bg-white/10 py-0.5 text-center text-[4px] text-white/50">Book</div>
-          </div>
-        ))}
+      {/* Testimonials */}
+      <div className="mx-5 mt-3">
+        <p className="text-[6px] font-medium text-emerald-400 uppercase tracking-wider">Reviews</p>
+        <p className="text-[10px] font-bold text-white mt-0.5">What our customers say</p>
+        <div className="mt-2 flex gap-1.5">
+          {[
+            { q: "Fixed our burst pipe in under an hour. Fair price and super professional.", n: "Sarah M.", l: "Homeowner" },
+            { q: "Best plumber we've ever hired. On time, clean, and honest about what we needed.", n: "Mark R.", l: "Property Manager" },
+            { q: "Same-day response for our water heater. Saved us thousands vs. replacement.", n: "Lisa K.", l: "Homeowner" },
+          ].map((r) => (
+            <div key={r.n} className="flex-1 rounded-lg border border-white/5 bg-white/[0.02] p-2">
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(s => <span key={s} className="text-[5px] text-yellow-500">★</span>)}
+              </div>
+              <p className="text-[5px] text-white/40 mt-1 italic leading-relaxed">&quot;{r.q}&quot;</p>
+              <p className="text-[5px] text-white/60 mt-1 font-medium">{r.n}</p>
+              <p className="text-[4px] text-white/20">{r.l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* CTA Banner */}
+      <div className="mx-5 mt-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 p-3 flex items-center justify-between">
+        <div>
+          <p className="text-[9px] font-bold text-white">Need a plumber today?</p>
+          <p className="text-[6px] text-emerald-100/60">Same-day service available. Call now or book online.</p>
+        </div>
+        <div className="flex gap-1.5">
+          <span className="rounded-md bg-white px-2.5 py-1 text-[7px] font-semibold text-emerald-700">Book Online</span>
+          <span className="rounded-md border border-white/30 px-2.5 py-1 text-[7px] font-medium text-white">(555) 123-4567</span>
+        </div>
+      </div>
+      {/* Footer */}
+      <div className="mt-3 border-t border-white/5 px-5 py-2.5 flex items-center justify-between">
+        <div className="flex items-center gap-1.5">
+          <div className="h-3.5 w-3.5 rounded bg-gradient-to-br from-emerald-500 to-emerald-700 text-[5px] font-bold text-white flex items-center justify-center">J</div>
+          <span className="text-[7px] font-semibold text-white/50">Joe&apos;s Plumbing</span>
+        </div>
+        <div className="flex gap-3">
+          {["Privacy", "Terms", "Sitemap"].map((l) => (
+            <span key={l} className="text-[5px] text-white/20">{l}</span>
+          ))}
+        </div>
+        <p className="text-[5px] text-white/15">&copy; 2026 Joe&apos;s Plumbing LLC</p>
       </div>
     </div>
   )

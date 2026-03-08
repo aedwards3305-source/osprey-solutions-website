@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 const navLinks = [
   { href: "/#services", label: "Services" },
@@ -41,10 +42,15 @@ export default function Header() {
     >
       <div className="section-container flex h-16 items-center justify-between sm:h-20">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-gradient">
-            <span className="text-lg font-bold text-white">O</span>
-          </div>
+        <a href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.png"
+            alt="Osprey Solutions"
+            width={40}
+            height={40}
+            className="h-10 w-10 object-contain"
+            priority
+          />
           <span className="text-lg font-bold tracking-tight text-brand-text">
             Osprey Solutions<span className="text-brand-emerald-glow">.</span>
           </span>
