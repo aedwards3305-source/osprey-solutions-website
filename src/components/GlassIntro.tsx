@@ -113,7 +113,7 @@ export default function GlassIntro() {
           {shards.map((s) => (
             <motion.div
               key={s.i}
-              className="absolute flex items-center justify-center border border-white/10 bg-white/[0.06] backdrop-blur-xl"
+              className="absolute flex items-center justify-center border border-white/[0.06] bg-white/[0.06] backdrop-blur-xl"
               style={{
                 left: `${(s.col / COLS) * 100}%`,
                 top: `${(s.row / ROWS) * 100}%`,
@@ -141,7 +141,7 @@ export default function GlassIntro() {
               }
             >
               {s.label && (
-                <span className="pointer-events-none whitespace-nowrap rounded-full border border-brand-emerald/30 bg-brand-black/50 px-3 py-1 text-xs font-semibold text-brand-emerald-glow sm:text-sm">
+                <span className="pointer-events-none hidden whitespace-nowrap rounded-full border border-brand-emerald/30 bg-brand-black/50 px-3 py-1 text-xs font-semibold text-brand-emerald-glow sm:inline-block sm:text-sm">
                   {s.label}
                 </span>
               )}
