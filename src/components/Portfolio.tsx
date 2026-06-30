@@ -1,15 +1,31 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useMemo, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { TrendingUp, ChevronDown, AlertTriangle, Lightbulb, BarChart3 } from "lucide-react"
+import { TrendingUp, ChevronDown, AlertTriangle, Lightbulb, BarChart3, ExternalLink } from "lucide-react"
+import { Reveal, TiltCard, BrowserFrame } from "@/components/fx"
 
 /* ━━━ Project Data ━━━ */
 
-const projects = [
+type Category = "Websites" | "Apps" | "E-Commerce"
+
+interface Project {
+  title: string
+  type: string
+  category: Category
+  url?: string
+  image: string
+  description: string
+  outcome: string
+  tech: string[]
+  caseStudy: { problem: string; solution: string; results: string }
+}
+
+const projects: Project[] = [
   {
     title: "Variety Amaya LLC",
     type: "Website + Lead Generation",
+    category: "Websites",
     url: "https://varietyamaya.net",
     image: "/variety-amaya.png",
     description:
@@ -17,7 +33,7 @@ const projects = [
     outcome: "3x more estimate requests in the first 60 days",
     tech: ["Next.js", "Tailwind CSS", "Vercel", "SEO"],
     caseStudy: {
-      problem: "Variety Amaya had no website and relied entirely on word-of-mouth and yard signs. Potential customers searching for contractors online couldn\u2019t find them, and they were losing jobs to competitors with a digital presence.",
+      problem: "Variety Amaya had no website and relied entirely on word-of-mouth and yard signs. Potential customers searching for contractors online couldn’t find them, and they were losing jobs to competitors with a digital presence.",
       solution: "We built a professional, mobile-first website showcasing all 24+ services with a fast estimate request form, customer testimonials, trust signals (licensed & insured, military discounts), and local SEO optimization for the DMV market.",
       results: "Estimate requests tripled in the first 60 days. The site ranks on page one for key local search terms. The owner reports that most new customers now find them through the website instead of referrals alone.",
     },
@@ -25,6 +41,7 @@ const projects = [
   {
     title: "B&R Seafood and More",
     type: "Restaurant Website",
+    category: "Websites",
     url: "https://brseafoodandmore.com",
     image: "/seafood-restaurant.png",
     description:
@@ -32,7 +49,7 @@ const projects = [
     outcome: "Online orders up 4x within the first month",
     tech: ["Next.js", "Tailwind CSS", "Vercel", "SEO"],
     caseStudy: {
-      problem: "B&R Seafood had no online presence beyond a basic social media page. Customers couldn\u2019t find their menu, hours, or location easily, and the business was invisible to anyone searching online.",
+      problem: "B&R Seafood had no online presence beyond a basic social media page. Customers couldn’t find their menu, hours, or location easily, and the business was invisible to anyone searching online.",
       solution: "We designed and built a polished restaurant website with a full digital menu, online ordering flow, event booking, location and hours prominently displayed, and local SEO to drive foot traffic.",
       results: "Online orders quadrupled in the first month. Google search visibility increased significantly, and the owner reports a steady stream of new customers who found them through the website.",
     },
@@ -40,10 +57,11 @@ const projects = [
   {
     title: "SafeSpace Inspection Tool",
     type: "Web Application",
+    category: "Apps",
     url: "https://safespace-jbh.vercel.app/welcome",
     image: "/safespace-inspection.png",
     description:
-      "A hospital EVS inspection platform with comprehensive building cleanliness assessments, real-time scoring, mobile-first design, and professional report generation\u2014all from a phone or tablet.",
+      "A hospital EVS inspection platform with comprehensive building cleanliness assessments, real-time scoring, mobile-first design, and professional report generation—all from a phone or tablet.",
     outcome: "Inspection time reduced by 60%",
     tech: ["Next.js", "Supabase", "Tailwind CSS", "PDF Generation"],
     caseStudy: {
@@ -55,6 +73,7 @@ const projects = [
   {
     title: "Beaton Junk Removal",
     type: "Website + Lead Generation",
+    category: "Websites",
     url: "https://beaton-junk-removal.vercel.app",
     image: "/beaton-junk-removal.png",
     description:
@@ -70,6 +89,7 @@ const projects = [
   {
     title: "Paradise Travels",
     type: "Travel Agency Website",
+    category: "Websites",
     url: "https://travel-agent-site.vercel.app",
     image: "/travel-agent-site.png",
     description:
@@ -77,7 +97,7 @@ const projects = [
     outcome: "3x more booking inquiries in 60 days",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Vercel"],
     caseStudy: {
-      problem: "The agency was booking trips through phone calls and email chains. They had no website to showcase destinations, and potential clients couldn\u2019t browse packages or get inspired before reaching out.",
+      problem: "The agency was booking trips through phone calls and email chains. They had no website to showcase destinations, and potential clients couldn’t browse packages or get inspired before reaching out.",
       solution: "We designed a visually stunning website with destination showcases, curated package browsing, immersive photography, trust signals (10+ years, 4.9-star rating), and a streamlined inquiry form that captures trip preferences.",
       results: "Booking inquiries tripled within 60 days. The average trip value increased as clients came in more informed and inspired. The agency now handles 40% of initial consultations through the website.",
     },
@@ -85,6 +105,7 @@ const projects = [
   {
     title: "New Era Studios",
     type: "E-Commerce Store",
+    category: "E-Commerce",
     image: "/new-era-hair.png",
     description:
       "A premium e-commerce store for luxury virgin hair extensions, HD lace wigs, and closures. Features product filtering, bundle deals, a clean shopping experience, and a brand identity that reflects elegance.",
@@ -98,205 +119,202 @@ const projects = [
   },
 ]
 
-/* ━━━ Card + Section Components ━━━ */
+const filters: Array<"All" | Category> = ["All", "Websites", "Apps", "E-Commerce"]
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-}
+/* ━━━ Project Card ━━━ */
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
+function ProjectCard({
+  project,
+  expanded,
+  onToggle,
+}: {
+  project: Project
+  expanded: boolean
+  onToggle: () => void
+}) {
+  const displayUrl = project.url
+    ? project.url.replace(/^https?:\/\//, "")
+    : `${project.title.toLowerCase().replace(/\s+/g, "")}.com`
 
-function ProjectCard({ project, expanded, onToggle }: { project: typeof projects[0]; expanded: boolean; onToggle: () => void }) {
-  const displayUrl = project.url ? project.url.replace(/^https?:\/\//, "") : `${project.title.toLowerCase().replace(/\s+/g, "")}.com`
-
-  const previewContent = (
-    <div className="relative">
-      {/* Browser chrome */}
-      <div className="flex items-center gap-1.5 bg-[#1a1a1f] px-3 py-1.5 border-b border-white/5">
-        <div className="flex gap-1">
-          <div className="h-1.5 w-1.5 rounded-full bg-red-500/60" />
-          <div className="h-1.5 w-1.5 rounded-full bg-yellow-500/60" />
-          <div className="h-1.5 w-1.5 rounded-full bg-green-500/60" />
-        </div>
-        <div className="flex-1 mx-2 rounded-md bg-white/5 px-2 py-0.5">
-          <span className={`text-[8px] ${project.url ? "text-white/40 underline underline-offset-2" : "text-white/25"}`}>{displayUrl}</span>
-        </div>
-      </div>
-      {/* Preview screenshot */}
+  const preview = (
+    <BrowserFrame url={displayUrl} className="transition-shadow duration-300 group-hover:shadow-brand-emerald/10">
       <div className="aspect-[16/10] overflow-hidden">
         <img
           src={project.image}
           alt={`${project.title} website screenshot`}
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          loading="lazy"
         />
       </div>
-      {/* Gradient fade at bottom */}
-      <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-brand-card/90 to-transparent" />
-    </div>
+      {project.url && (
+        <div className="pointer-events-none absolute right-3 top-12 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+          <ExternalLink className="h-3 w-3" /> Visit live site
+        </div>
+      )}
+    </BrowserFrame>
   )
 
   return (
-    <motion.div
-      variants={cardVariants}
-      className="glass-card-hover group flex flex-col overflow-hidden"
-    >
-      {/* Browser frame preview */}
-      {project.url ? (
-        <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
-          {previewContent}
-        </a>
-      ) : previewContent}
-
-      {/* Card body */}
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <span className="text-xs font-medium uppercase tracking-wider text-brand-subtle">
-          {project.type}
-        </span>
-        <h3 className="mt-2 text-xl font-semibold text-brand-text">
-          {project.title}
-        </h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-muted">
-          {project.description}
-        </p>
-
-        {/* Outcome */}
-        <div className="mt-5 flex items-start gap-2 rounded-lg bg-brand-emerald/8 p-3">
-          <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-brand-emerald-glow" />
-          <span className="text-sm font-medium text-brand-emerald-glow">
-            {project.outcome}
-          </span>
-        </div>
-
-        {/* Tech */}
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tech.map((t) => (
-            <span
-              key={t}
-              className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs text-brand-subtle"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Expand toggle */}
-        <button
-          onClick={onToggle}
-          className="mt-4 flex items-center gap-1.5 text-sm font-medium text-brand-emerald-glow transition-colors hover:text-brand-emerald-light"
-        >
-          {expanded ? "Hide" : "View"} Case Study
-          <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-        </button>
-
-        {/* Case Study Expander */}
-        <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="mt-4 space-y-4 border-t border-brand-border/30 pt-4">
-                <div className="flex gap-3">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-red-400">Problem</p>
-                    <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.problem}</p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold">Solution</p>
-                    <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.solution}</p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-brand-emerald-glow" />
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-emerald-glow">Results</p>
-                    <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.results}</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+    <TiltCard className="h-full [perspective:1000px]" max={5}>
+      <div className="glass-card-hover group flex h-full flex-col overflow-hidden rounded-2xl">
+        {/* Device-framed preview */}
+        <div className="p-4 pb-0">
+          {project.url ? (
+            <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+              {preview}
+            </a>
+          ) : (
+            preview
           )}
-        </AnimatePresence>
+        </div>
+
+        {/* Body */}
+        <div className="flex flex-1 flex-col p-6 sm:p-7">
+          <span className="text-xs font-medium uppercase tracking-wider text-brand-subtle">
+            {project.type}
+          </span>
+          <h3 className="mt-2 text-xl font-semibold text-brand-text">{project.title}</h3>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-muted">
+            {project.description}
+          </p>
+
+          {/* Outcome */}
+          <div className="mt-5 flex items-start gap-2 rounded-lg bg-brand-emerald/8 p-3 ring-1 ring-brand-emerald/15">
+            <TrendingUp className="mt-0.5 h-4 w-4 shrink-0 text-brand-emerald-glow" />
+            <span className="text-sm font-medium text-brand-emerald-glow">{project.outcome}</span>
+          </div>
+
+          {/* Tech */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span key={t} className="rounded-full bg-white/5 px-2.5 py-0.5 text-xs text-brand-subtle">
+                {t}
+              </span>
+            ))}
+          </div>
+
+          {/* Expand toggle */}
+          <button
+            onClick={onToggle}
+            className="mt-4 flex items-center gap-1.5 text-sm font-medium text-brand-emerald-glow transition-colors hover:text-brand-emerald-light"
+          >
+            {expanded ? "Hide" : "View"} Case Study
+            <ChevronDown className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
+          </button>
+
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4 space-y-4 border-t border-brand-border/30 pt-4">
+                  <div className="flex gap-3">
+                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-red-400">Problem</p>
+                      <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.problem}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold">Solution</p>
+                      <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.solution}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-brand-emerald-glow" />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-emerald-glow">Results</p>
+                      <p className="mt-1 text-sm leading-relaxed text-brand-muted">{project.caseStudy.results}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </motion.div>
+    </TiltCard>
   )
 }
 
+/* ━━━ Section ━━━ */
+
 export default function Portfolio() {
-  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set())
-  const [cols, setCols] = useState(3)
+  const [active, setActive] = useState<"All" | Category>("All")
+  const [expanded, setExpanded] = useState<Set<string>>(new Set())
 
-  useEffect(() => {
-    const updateCols = () => {
-      if (window.innerWidth >= 1024) setCols(3)
-      else if (window.innerWidth >= 768) setCols(2)
-      else setCols(1)
-    }
-    updateCols()
-    window.addEventListener("resize", updateCols)
-    return () => window.removeEventListener("resize", updateCols)
-  }, [])
+  const visible = useMemo(
+    () => (active === "All" ? projects : projects.filter((p) => p.category === active)),
+    [active]
+  )
 
-  const toggleRow = useCallback((index: number) => {
-    const row = Math.floor(index / cols)
-    setExpandedRows(prev => {
+  const toggle = (title: string) =>
+    setExpanded((prev) => {
       const next = new Set(prev)
-      if (next.has(row)) next.delete(row)
-      else next.add(row)
+      next.has(title) ? next.delete(title) : next.add(title)
       return next
     })
-  }, [cols])
-
-  const isExpanded = useCallback((index: number) => {
-    return expandedRows.has(Math.floor(index / cols))
-  }, [expandedRows, cols])
 
   return (
     <section id="work" className="section-padding relative">
-      {/* Background decoration */}
       <div className="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] rounded-full bg-brand-emerald/3 blur-[150px]" />
 
       <div className="section-container relative">
         {/* Header */}
-        <div className="text-center">
+        <Reveal className="text-center">
           <span className="section-label">Featured Work</span>
           <h2 className="section-title">
-            Real results for{" "}
-            <span className="text-gradient-emerald">real businesses</span>
+            Real results for <span className="text-gradient-emerald">real businesses</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Every project starts with a business problem and ends with measurable
-            impact. Here are a few we&apos;re proud of.
+            Every project starts with a business problem and ends with measurable impact.
+            Here are a few we&apos;re proud of.
           </p>
-        </div>
+        </Reveal>
+
+        {/* Filter tabs */}
+        <Reveal className="mt-10 flex flex-wrap justify-center gap-2" delay={0.1}>
+          {filters.map((f) => (
+            <button
+              key={f}
+              onClick={() => setActive(f)}
+              className={`rounded-full border px-5 py-2 text-sm font-medium transition-all duration-300 ${
+                active === f
+                  ? "border-brand-emerald/40 bg-brand-emerald/15 text-brand-emerald-glow"
+                  : "border-brand-border/50 text-brand-muted hover:border-brand-emerald/30 hover:text-brand-text"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </Reveal>
 
         {/* Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.map((project, i) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              expanded={isExpanded(i)}
-              onToggle={() => toggleRow(i)}
-            />
-          ))}
+        <motion.div layout className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {visible.map((project) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35 }}
+              >
+                <ProjectCard
+                  project={project}
+                  expanded={expanded.has(project.title)}
+                  onToggle={() => toggle(project.title)}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
