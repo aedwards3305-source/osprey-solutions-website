@@ -143,7 +143,7 @@ function ProjectCard({
         />
       </div>
       {project.url && (
-        <div className="pointer-events-none absolute right-3 top-12 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute right-3 top-3 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
           <ExternalLink className="h-3 w-3" /> Visit live site
         </div>
       )}
