@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
+import { Marquee, Reveal } from "@/components/fx"
 
 const testimonials = [
   {
@@ -132,9 +133,30 @@ export default function Testimonials() {
     <section className="section-padding relative overflow-hidden">
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-emerald/3 blur-[150px]" />
 
+      {/* Scrolling name wall (faint, behind everything) */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-10 flex flex-col gap-6 opacity-[0.05]"
+        aria-hidden
+      >
+        <Marquee speed={55}>
+          {testimonials.map((t) => (
+            <span key={t.name} className="mx-6 whitespace-nowrap font-display text-4xl font-bold text-brand-text">
+              {t.business}
+            </span>
+          ))}
+        </Marquee>
+        <Marquee speed={70} reverse>
+          {testimonials.map((t) => (
+            <span key={t.name} className="mx-6 whitespace-nowrap font-display text-4xl font-bold text-brand-text">
+              {t.name}
+            </span>
+          ))}
+        </Marquee>
+      </div>
+
       <div className="section-container relative">
         {/* Header */}
-        <div className="text-center">
+        <Reveal className="text-center">
           <span className="section-label">Testimonials</span>
           <h2 className="section-title">
             Trusted by businesses{" "}
@@ -144,7 +166,7 @@ export default function Testimonials() {
             Don&apos;t take our word for it&mdash;hear from founders and operators
             who chose Osprey Solutions.
           </p>
-        </div>
+        </Reveal>
 
         {/* Carousel */}
         <div
