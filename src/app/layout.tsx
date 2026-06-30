@@ -1,5 +1,12 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import {
+  AuroraBackground,
+  GrainOverlay,
+  DotGrid,
+  ScrollProgress,
+  Spotlight,
+} from "@/components/fx"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ospreysolutionsllc.com"),
@@ -101,8 +108,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="noise-bg min-h-screen overflow-x-hidden">
-        {children}
+      <body className="min-h-screen overflow-x-hidden">
+        {/* Global cinematic shell — fixed behind all content */}
+        <AuroraBackground />
+        <DotGrid />
+        <GrainOverlay />
+        <Spotlight />
+        <ScrollProgress />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   )
