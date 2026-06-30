@@ -12,14 +12,15 @@ interface WordRotatorProps {
 }
 
 /**
- * Cycles through `words` in place with a vertical flip. Under reduced-motion
- * it shows the first word statically. The gradient styling is applied by the
- * caller via `className`.
+ * Cycles through `words` in place with a clean crossfade. Only one word is
+ * ever visible (mode="wait"), and the slot reserves the width/height of the
+ * longest word so the headline never reflows or shows overlapping text. Under
+ * reduced-motion it shows the first word statically.
  */
 export default function WordRotator({
   words,
   className,
-  interval = 2200,
+  interval = 2400,
 }: WordRotatorProps) {
   const reduced = usePrefersReducedMotion()
   const [i, setI] = useState(0)
@@ -33,21 +34,28 @@ export default function WordRotator({
     return () => window.clearInterval(id)
   }, [reduced, words.length, interval])
 
+  // Widest word reserves the slot so nothing shifts as words swap.
+  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "")
+
   if (reduced) {
     return <span className={className}>{words[0]}</span>
   }
 
   return (
-    <span className="relative inline-grid overflow-hidden align-bottom">
-      <AnimatePresence mode="popLayout" initial={false}>
+    <span className="relative inline-block whitespace-nowrap align-bottom">
+      {/* Invisible sizer */}
+      <span className={`invisible ${className ?? ""}`} aria-hidden>
+        {longest}
+      </span>
+      {/* Crossfading active word, left-aligned over the sizer */}
+      <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={words[i]}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className={className}
-          style={{ gridArea: "1 / 1" }}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className={`absolute inset-0 text-left ${className ?? ""}`}
         >
           {words[i]}
         </motion.span>

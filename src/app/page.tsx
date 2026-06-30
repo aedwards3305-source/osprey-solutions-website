@@ -1,5 +1,6 @@
 import Header from "@/components/Header"
 import Hero from "@/components/Hero"
+import StatsCounter from "@/components/StatsCounter"
 import Services from "@/components/Services"
 import Portfolio from "@/components/Portfolio"
 import Comparison from "@/components/Comparison"
@@ -14,6 +15,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <StatsCounter />
         <Services />
         <Portfolio />
         <Comparison />

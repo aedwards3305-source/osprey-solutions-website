@@ -2,15 +2,8 @@
 
 import { useRef, useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Zap, Shield, Clock, Headphones, GripVertical } from "lucide-react"
+import { ArrowRight, Clock, GripVertical, Rocket, ShieldCheck, Sparkles } from "lucide-react"
 import { MagneticButton, WordRotator, Marquee } from "@/components/fx"
-
-const trustItems = [
-  { icon: Zap, text: "Launch in under 72 hours" },
-  { icon: Shield, text: "You own everything" },
-  { icon: Clock, text: "98% on-time delivery" },
-  { icon: Headphones, text: "Direct communication" },
-]
 
 const techStack = [
   "Next.js",
@@ -25,13 +18,14 @@ const techStack = [
   "Node.js",
 ]
 
-// Floating glass chips that parallax-bob beside the headline on large screens.
+// Floating glass badges that parallax-bob beside the headline on large screens.
 const floatChips = [
-  { text: "72h launch", className: "left-[3%] top-[150px]", anim: "animate-float-slow" },
-  { text: "You own the code", className: "right-[2%] top-[120px]", anim: "animate-float-slower" },
-  { text: "98% on-time", className: "left-[7%] top-[300px]", anim: "animate-float-slower" },
-  { text: "AI-powered", className: "right-[6%] top-[290px]", anim: "animate-float-slow" },
+  { icon: Rocket, text: "72h launch", className: "left-[3%] top-[150px]", anim: "animate-float-slow" },
+  { icon: ShieldCheck, text: "You own the code", className: "right-[2%] top-[120px]", anim: "animate-float-slower" },
+  { icon: Clock, text: "98% on-time", className: "left-[7%] top-[300px]", anim: "animate-float-slower" },
+  { icon: Sparkles, text: "AI-powered", className: "right-[6%] top-[290px]", anim: "animate-float-slow" },
 ]
+
 
 function BeforeSite() {
   return (
@@ -409,14 +403,16 @@ function HeroBeforeAfter() {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pb-12">
-      {/* Floating parallax chips (desktop only) */}
+      {/* Floating glass badges (desktop only) */}
       <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-[560px] lg:block" aria-hidden>
         {floatChips.map((chip) => (
           <div
             key={chip.text}
-            className={`absolute ${chip.className} ${chip.anim} rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-brand-muted backdrop-blur-md`}
+            className={`absolute ${chip.className} ${chip.anim} flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-brand-text shadow-xl shadow-black/30 backdrop-blur-md`}
           >
-            <span className="mr-1.5 inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-brand-emerald-glow" />
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-brand-emerald/15 text-brand-emerald-glow">
+              <chip.icon className="h-3.5 w-3.5" />
+            </span>
             {chip.text}
           </div>
         ))}
@@ -476,24 +472,6 @@ export default function Hero() {
           <MagneticButton href="/book" className="btn-secondary text-base px-8 py-4">
             Book a Call
           </MagneticButton>
-        </motion.div>
-
-        {/* Trust strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8"
-        >
-          {trustItems.map((item) => (
-            <div
-              key={item.text}
-              className="flex items-center gap-2.5 text-sm text-brand-muted"
-            >
-              <item.icon className="h-4 w-4 shrink-0 text-brand-emerald-glow" />
-              <span>{item.text}</span>
-            </div>
-          ))}
         </motion.div>
 
         {/* Before/After mockup */}
