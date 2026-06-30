@@ -127,16 +127,22 @@ function StepCard({ step, index }: { step: typeof steps[0]; index: number }) {
         </motion.div>
       </div>
 
-      {/* Center icon (desktop) */}
-      <div className="absolute left-1/2 top-6 z-10 hidden -translate-x-1/2 lg:flex">
+      {/* Center node (desktop) — glowing numbered marker */}
+      <div className="absolute left-1/2 top-4 z-10 hidden -translate-x-1/2 lg:flex">
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           whileInView={{ scale: 1, rotate: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
-          className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-emerald/30 bg-brand-dark text-brand-emerald-glow shadow-lg shadow-brand-emerald/10"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full border border-brand-emerald/40 bg-brand-dark text-brand-emerald-glow shadow-[0_0_24px_rgba(20,168,104,0.35)] ring-4 ring-brand-black"
         >
-          <step.icon className="h-5 w-5" />
+          {/* Pulsing halo */}
+          <span className="absolute inset-0 rounded-full bg-brand-emerald/20 blur-md" />
+          <step.icon className="relative h-5 w-5" />
+          {/* Step number badge */}
+          <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full border border-brand-emerald/40 bg-brand-emerald-glow text-xs font-bold text-brand-black">
+            {index + 1}
+          </span>
         </motion.div>
       </div>
 
@@ -176,9 +182,9 @@ export default function Process() {
         <div ref={containerRef} className="relative mt-16">
           {/* Static vertical line (background) */}
           <div className="absolute left-6 top-0 hidden h-full w-px bg-brand-border/30 lg:left-1/2 lg:block" />
-          {/* Animated progress line */}
+          {/* Animated progress beam */}
           <motion.div
-            className="absolute left-6 top-0 hidden w-px bg-gradient-to-b from-brand-emerald-glow to-brand-emerald/40 lg:left-1/2 lg:block"
+            className="absolute left-6 top-0 hidden w-[3px] -translate-x-px rounded-full bg-gradient-to-b from-brand-gold via-brand-emerald-glow to-brand-emerald/40 shadow-[0_0_12px_rgba(20,168,104,0.6)] lg:left-1/2 lg:block"
             style={{ height: lineHeight }}
           />
 
