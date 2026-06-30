@@ -7,6 +7,7 @@ import {
   ScrollProgress,
   Spotlight,
 } from "@/components/fx"
+import GlassIntro from "@/components/GlassIntro"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ospreysolutionsllc.com"),
@@ -115,6 +116,7 @@ export default function RootLayout({
         <GrainOverlay />
         <Spotlight />
         <ScrollProgress />
+        <GlassIntro />
         <div className="relative z-10">{children}</div>
       </body>
     </html>
