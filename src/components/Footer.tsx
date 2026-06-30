@@ -2,6 +2,8 @@
 
 import { ArrowRight, MapPin, Mail, Phone } from "lucide-react"
 import Image from "next/image"
+import { MagneticButton } from "@/components/fx"
+import BrandMark from "@/components/BrandMark"
 
 const quickLinks = [
   { href: "/#services", label: "Services" },
@@ -21,8 +23,12 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border/30 bg-brand-dark/50">
-      <div className="section-container py-16">
+    <footer className="relative overflow-hidden border-t border-brand-border/30 bg-brand-dark/50">
+      {/* Faint brand watermark */}
+      <BrandMark
+        className="pointer-events-none absolute -right-10 -top-16 h-64 w-64 opacity-[0.04]"
+      />
+      <div className="section-container relative py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -42,12 +48,12 @@ export default function Footer() {
               Apps, websites, and digital systems that win customers. Built for
               small businesses and growing teams.
             </p>
-            <a
+            <MagneticButton
               href="/#contact"
               className="btn-primary mt-6 text-sm"
             >
               Request a Quote <ArrowRight className="h-4 w-4" />
-            </a>
+            </MagneticButton>
           </div>
 
           {/* Quick links */}

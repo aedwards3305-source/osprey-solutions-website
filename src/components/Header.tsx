@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { MagneticButton } from "@/components/fx"
 
 const navLinks = [
   { href: "/#services", label: "Services" },
@@ -74,9 +75,9 @@ export default function Header() {
           <a href="/book" className="btn-ghost text-sm">
             Book a Call
           </a>
-          <a href="/#contact" className="btn-primary text-sm">
+          <MagneticButton href="/#contact" className="btn-primary text-sm">
             Request a Quote <ArrowRight className="h-4 w-4" />
-          </a>
+          </MagneticButton>
         </div>
 
         {/* Mobile toggle */}
