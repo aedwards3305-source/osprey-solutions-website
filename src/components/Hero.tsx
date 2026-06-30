@@ -7,7 +7,6 @@ import {
   MagneticButton,
   WordRotator,
   Marquee,
-  BrowserFrame,
   TiltCard,
   usePrefersReducedMotion,
 } from "@/components/fx"
@@ -72,37 +71,35 @@ function HeroShowcase() {
       <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-brand-emerald/10 blur-3xl" />
 
       <TiltCard max={5} className="relative [perspective:1400px]">
-        <BrowserFrame url={cur.url} className="shadow-2xl shadow-black/50">
-          <div className="relative aspect-[16/10] overflow-hidden bg-brand-black">
-            <AnimatePresence mode="popLayout">
-              <motion.img
-                key={cur.image}
-                src={cur.image}
-                alt={`${cur.title} — built by Osprey Solutions`}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.99 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
-            </AnimatePresence>
+        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-brand-black shadow-2xl shadow-black/50 ring-1 ring-white/5">
+          <AnimatePresence mode="popLayout">
+            <motion.img
+              key={cur.image}
+              src={cur.image}
+              alt={`${cur.title} — built by Osprey Solutions`}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.99 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="absolute inset-0 h-full w-full object-cover object-top"
+            />
+          </AnimatePresence>
 
-            {/* Outcome badge */}
-            <AnimatePresence mode="popLayout">
-              <motion.div
-                key={cur.outcome}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.4 }}
-                className="absolute bottom-4 left-4 flex items-center gap-2 rounded-xl border border-brand-emerald/30 bg-brand-black/70 px-3.5 py-2 text-sm font-semibold text-brand-emerald-glow backdrop-blur-md"
-              >
-                <TrendingUp className="h-4 w-4" />
-                {cur.outcome}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </BrowserFrame>
+          {/* Outcome badge */}
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={cur.outcome}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
+              className="absolute bottom-4 left-4 flex items-center gap-2 rounded-xl border border-brand-emerald/30 bg-brand-black/70 px-3.5 py-2 text-sm font-semibold text-brand-emerald-glow backdrop-blur-md"
+            >
+              <TrendingUp className="h-4 w-4" />
+              {cur.outcome}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </TiltCard>
 
       {/* Project selector */}
