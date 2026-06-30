@@ -28,11 +28,18 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
+          "Satoshi",
           "Inter",
           "system-ui",
           "-apple-system",
           "Segoe UI",
           "Roboto",
+          "sans-serif",
+        ],
+        display: [
+          "Clash Display",
+          "Satoshi",
+          "system-ui",
           "sans-serif",
         ],
       },
@@ -48,6 +55,12 @@ const config: Config = {
       animation: {
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "fade-in": "fade-in 0.6s ease-out",
+        "aurora-1": "aurora-1 22s ease-in-out infinite",
+        "aurora-2": "aurora-2 28s ease-in-out infinite",
+        "aurora-3": "aurora-3 34s ease-in-out infinite",
+        "float-slow": "float 8s ease-in-out infinite",
+        "float-slower": "float 11s ease-in-out infinite",
+        "draw": "draw 1.6s ease-out forwards",
       },
       keyframes: {
         "glow-pulse": {
@@ -57,6 +70,26 @@ const config: Config = {
         "fade-in": {
           "0%": { opacity: "0", transform: "translateY(12px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "aurora-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "50%": { transform: "translate(8%, 6%) scale(1.18)" },
+        },
+        "aurora-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1.1)" },
+          "50%": { transform: "translate(-10%, -4%) scale(0.92)" },
+        },
+        "aurora-3": {
+          "0%, 100%": { transform: "translate(0, 0) scale(0.95)" },
+          "50%": { transform: "translate(6%, -8%) scale(1.12)" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "draw": {
+          "0%": { strokeDashoffset: "1" },
+          "100%": { strokeDashoffset: "0" },
         },
       },
     },
