@@ -132,12 +132,8 @@ function ProjectCard({
   expanded: boolean
   onToggle: () => void
 }) {
-  const displayUrl = project.url
-    ? project.url.replace(/^https?:\/\//, "")
-    : `${project.title.toLowerCase().replace(/\s+/g, "")}.com`
-
   const preview = (
-    <BrowserFrame url={displayUrl} className="transition-shadow duration-300 group-hover:shadow-brand-emerald/10">
+    <BrowserFrame className="transition-shadow duration-300 group-hover:shadow-brand-emerald/10">
       <div className="aspect-[16/10] overflow-hidden">
         <img
           src={project.image}

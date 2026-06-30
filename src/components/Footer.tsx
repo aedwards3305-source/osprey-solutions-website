@@ -3,7 +3,6 @@
 import { ArrowRight, MapPin, Mail, Phone } from "lucide-react"
 import Image from "next/image"
 import { MagneticButton } from "@/components/fx"
-import BrandMark from "@/components/BrandMark"
 
 const quickLinks = [
   { href: "/#services", label: "Services" },
@@ -24,9 +23,14 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-brand-border/30 bg-brand-dark/50">
-      {/* Faint brand watermark */}
-      <BrandMark
-        className="pointer-events-none absolute -right-10 -top-16 h-64 w-64 opacity-[0.04]"
+      {/* Faint brand watermark — real logo */}
+      <Image
+        src="/logo.png"
+        alt=""
+        width={280}
+        height={280}
+        aria-hidden
+        className="pointer-events-none absolute -right-12 -top-16 h-64 w-64 object-contain opacity-[0.05]"
       />
       <div className="section-container relative py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
