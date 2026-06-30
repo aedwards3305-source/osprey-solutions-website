@@ -13,6 +13,8 @@ interface MagneticButtonProps {
   target?: string
   rel?: string
   onClick?: () => void
+  type?: "button" | "submit"
+  disabled?: boolean
 }
 
 /**
@@ -28,6 +30,8 @@ export default function MagneticButton({
   target,
   rel,
   onClick,
+  type,
+  disabled,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null)
   const pointerFine = useIsPointerFine()
@@ -62,6 +66,8 @@ export default function MagneticButton({
       target={target}
       rel={rel}
       onClick={onClick}
+      type={href ? undefined : type}
+      disabled={href ? undefined : disabled}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={active ? { x: sx, y: sy } : undefined}

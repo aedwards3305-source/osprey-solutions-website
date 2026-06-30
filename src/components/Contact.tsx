@@ -11,6 +11,7 @@ import {
   Shield,
   Calendar,
 } from "lucide-react"
+import { Reveal, Stagger, MagneticButton } from "@/components/fx"
 
 const FORM_ENDPOINT = "/api/lead"
 // To use Formspree instead, uncomment the line below and add your form ID:
@@ -127,13 +128,16 @@ export default function Contact() {
     }`
 
   return (
-    <section id="contact" className="section-padding relative">
-      <div className="pointer-events-none absolute left-0 bottom-0 h-[500px] w-[500px] rounded-full bg-brand-emerald/3 blur-[150px]" />
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* Intensified aurora for the closing moment */}
+      <div className="pointer-events-none absolute left-0 bottom-0 h-[500px] w-[500px] rounded-full bg-brand-emerald/10 blur-[150px]" />
+      <div className="pointer-events-none absolute right-0 top-1/4 h-[400px] w-[400px] rounded-full bg-brand-gold/5 blur-[150px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-brand-emerald/40 to-transparent" />
 
       <div className="section-container relative">
         <div className="mx-auto max-w-5xl">
           {/* Header */}
-          <div className="text-center">
+          <Reveal className="text-center">
             <span className="section-label">Get Started</span>
             <h2 className="section-title">
               Let&apos;s build something{" "}
@@ -143,7 +147,7 @@ export default function Contact() {
               Tell us about your project and we&apos;ll get back to you with a
               clear plan, timeline, and quote&mdash;no obligation.
             </p>
-          </div>
+          </Reveal>
 
           <div className="mt-16 grid gap-10 lg:grid-cols-5">
             {/* Sidebar */}
@@ -170,15 +174,20 @@ export default function Contact() {
                       icon: Shield,
                       text: "You approve before any work begins",
                     },
-                  ].map((item) => (
-                    <li key={item.text} className="flex items-start gap-3">
+                  ].map((item, i) => (
+                    <Reveal
+                      key={item.text}
+                      as="li"
+                      delay={i * 0.08}
+                      className="flex items-start gap-3"
+                    >
                       <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-emerald/10">
                         <item.icon className="h-4 w-4 text-brand-emerald-glow" />
                       </div>
                       <span className="text-sm text-brand-muted">
                         {item.text}
                       </span>
-                    </li>
+                    </Reveal>
                   ))}
                 </ul>
               </div>
@@ -384,7 +393,7 @@ export default function Contact() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => updateField("message", e.target.value)}
-                      placeholder="Tell us about your project\u2014what you need, who it's for, and what success looks like."
+                      placeholder="Tell us about your project: what you need, who it's for, and what success looks like."
                       className={`${inputClass("message")} resize-none`}
                     />
                     {errors.message && (
@@ -393,7 +402,7 @@ export default function Contact() {
                   </div>
 
                   {/* Submit */}
-                  <button
+                  <MagneticButton
                     type="submit"
                     disabled={status === "loading"}
                     className="btn-primary w-full text-base"
@@ -409,7 +418,7 @@ export default function Contact() {
                         Request a Quote
                       </>
                     )}
-                  </button>
+                  </MagneticButton>
 
                   {status === "error" && (
                     <p className="text-center text-sm text-red-400">
