@@ -3,12 +3,34 @@
 import { useRef, useState, useCallback, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Zap, Shield, Clock, Headphones, GripVertical } from "lucide-react"
+import { MagneticButton, WordRotator, Marquee } from "@/components/fx"
 
 const trustItems = [
   { icon: Zap, text: "Launch in under 72 hours" },
   { icon: Shield, text: "You own everything" },
   { icon: Clock, text: "98% on-time delivery" },
   { icon: Headphones, text: "Direct communication" },
+]
+
+const techStack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Tailwind CSS",
+  "Framer Motion",
+  "Supabase",
+  "Stripe",
+  "Vercel",
+  "OpenAI",
+  "Node.js",
+]
+
+// Floating glass chips that parallax-bob beside the headline on large screens.
+const floatChips = [
+  { text: "72h launch", className: "left-[3%] top-[150px]", anim: "animate-float-slow" },
+  { text: "You own the code", className: "right-[2%] top-[120px]", anim: "animate-float-slower" },
+  { text: "98% on-time", className: "left-[7%] top-[300px]", anim: "animate-float-slower" },
+  { text: "AI-powered", className: "right-[6%] top-[290px]", anim: "animate-float-slow" },
 ]
 
 function BeforeSite() {
@@ -386,11 +408,18 @@ function HeroBeforeAfter() {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-hero-gradient pb-12">
-      {/* Decorative elements */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-brand-emerald/5 blur-[120px]" />
-        <div className="absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-brand-gold/3 blur-[100px]" />
+    <section className="relative overflow-hidden pb-12">
+      {/* Floating parallax chips (desktop only) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 hidden h-[560px] lg:block" aria-hidden>
+        {floatChips.map((chip) => (
+          <div
+            key={chip.text}
+            className={`absolute ${chip.className} ${chip.anim} rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-brand-muted backdrop-blur-md`}
+          >
+            <span className="mr-1.5 inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-brand-emerald-glow" />
+            {chip.text}
+          </div>
+        ))}
       </div>
 
       <div className="section-container relative flex flex-col items-center pt-28 sm:pt-36 text-center">
@@ -411,10 +440,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-8 max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mt-8 max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          Apps, websites &amp; AI-powered systems that{" "}
-          <span className="text-gradient-emerald">win customers</span>
+          Apps, websites &amp; AI systems that{" "}
+          <span className="whitespace-nowrap">
+            win{" "}
+            <WordRotator
+              words={["customers", "leads", "revenue", "bookings"]}
+              className="text-gradient-emerald"
+            />
+          </span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -435,12 +470,12 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
         >
-          <a href="/#contact" className="btn-primary text-base px-8 py-4">
+          <MagneticButton href="/#contact" className="btn-primary text-base px-8 py-4">
             Request a Quote <ArrowRight className="h-5 w-5" />
-          </a>
-          <a href="/book" className="btn-secondary text-base px-8 py-4">
+          </MagneticButton>
+          <MagneticButton href="/book" className="btn-secondary text-base px-8 py-4">
             Book a Call
-          </a>
+          </MagneticButton>
         </motion.div>
 
         {/* Trust strip */}
@@ -463,10 +498,32 @@ export default function Hero() {
 
         {/* Before/After mockup */}
         <HeroBeforeAfter />
+
+        {/* Tech-stack marquee */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-10 w-full max-w-5xl"
+        >
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-brand-subtle">
+            Built on a modern, future-proof stack
+          </p>
+          <Marquee speed={32}>
+            {techStack.map((tech) => (
+              <span
+                key={tech}
+                className="mx-3 rounded-full border border-white/8 bg-white/[0.03] px-5 py-2 text-sm font-medium text-brand-muted"
+              >
+                {tech}
+              </span>
+            ))}
+          </Marquee>
+        </motion.div>
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-black to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-brand-black to-transparent" />
     </section>
   )
 }
