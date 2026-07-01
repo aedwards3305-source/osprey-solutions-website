@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import "./globals.css"
-import { GoogleAnalytics } from "@next/third-parties/google"
 import {
   AuroraBackground,
   GrainOverlay,
@@ -112,6 +111,23 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Google Analytics 4 (gtag.js) */}
+        {GA_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="min-h-screen overflow-x-hidden">
         {/* Global cinematic shell — fixed behind all content */}
@@ -122,8 +138,6 @@ export default function RootLayout({
         <ScrollProgress />
         <GlassIntro />
         <div className="relative z-10">{children}</div>
-        {/* Google Analytics 4 — only loads when the Measurement ID is configured */}
-        {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
       </body>
     </html>
   )
