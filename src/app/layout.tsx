@@ -122,9 +122,9 @@ export default function RootLayout({
         <ScrollProgress />
         <GlassIntro />
         <div className="relative z-10">{children}</div>
+        {/* Google Analytics 4 — only loads when the Measurement ID is configured */}
+        {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
       </body>
-      {/* Google Analytics 4 — only loads when the Measurement ID is configured */}
-      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   )
 }
