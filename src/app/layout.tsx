@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import {
   AuroraBackground,
   GrainOverlay,
@@ -8,6 +9,9 @@ import {
   Spotlight,
 } from "@/components/fx"
 import GlassIntro from "@/components/GlassIntro"
+
+// Google Analytics 4 Measurement ID (e.g. "G-XXXXXXXXXX"), set in env.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ospreysolutionsllc.com"),
@@ -119,6 +123,8 @@ export default function RootLayout({
         <GlassIntro />
         <div className="relative z-10">{children}</div>
       </body>
+      {/* Google Analytics 4 — only loads when the Measurement ID is configured */}
+      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   )
 }
