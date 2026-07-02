@@ -22,59 +22,13 @@ function rand(seed: number) {
   return x - Math.floor(x)
 }
 
-// Synthesize a glass-break: a sharp filtered noise crack followed by a
-// scatter of high, quickly-decaying "shard" tinkles. No audio asset needed,
-// and it fires cleanly because enter() runs from a user tap.
+// Play the real glass-shatter sample when the gate breaks. It fires cleanly
+// because enter() runs from a user tap (satisfies autoplay policies).
 function playGlassBreak() {
   try {
-    const Ctx =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
-    if (!Ctx) return
-    const ctx = new Ctx()
-    const now = ctx.currentTime
-    const master = ctx.createGain()
-    master.gain.value = 0.5
-    master.connect(ctx.destination)
-
-    // The crack: a short white-noise burst through a high-pass filter.
-    const dur = 0.45
-    const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate)
-    const data = buffer.getChannelData(0)
-    for (let i = 0; i < data.length; i++) {
-      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / data.length, 2)
-    }
-    const noise = ctx.createBufferSource()
-    noise.buffer = buffer
-    const hp = ctx.createBiquadFilter()
-    hp.type = "highpass"
-    hp.frequency.value = 1800
-    const noiseGain = ctx.createGain()
-    noiseGain.gain.setValueAtTime(0.9, now)
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + dur)
-    noise.connect(hp).connect(noiseGain).connect(master)
-    noise.start(now)
-    noise.stop(now + dur)
-
-    // The shards: a handful of high triangle tones falling at random offsets.
-    for (let s = 0; s < 9; s++) {
-      const osc = ctx.createOscillator()
-      osc.type = "triangle"
-      const freq = 2600 + Math.random() * 4200
-      const t = now + Math.random() * 0.28
-      const decay = 0.18 + Math.random() * 0.22
-      osc.frequency.setValueAtTime(freq, t)
-      osc.frequency.exponentialRampToValueAtTime(freq * 0.6, t + decay)
-      const g = ctx.createGain()
-      g.gain.setValueAtTime(0.18, t)
-      g.gain.exponentialRampToValueAtTime(0.001, t + decay)
-      osc.connect(g).connect(master)
-      osc.start(t)
-      osc.stop(t + decay)
-    }
-
-    // Release the context once the sound has finished.
-    window.setTimeout(() => ctx.close().catch(() => {}), 1200)
+    const audio = new Audio("/sounds/glass-break.mp3")
+    audio.volume = 0.7
+    void audio.play().catch(() => {})
   } catch {
     /* audio is a nice-to-have; never block entering */
   }
